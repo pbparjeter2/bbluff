@@ -1,0 +1,2471 @@
+
+BOOK - INTRO
+
+Release along with an interpreter.
+
+
+Release along with the "Parchment" interpreter.
+
+Part - General Introduction
+
+Include Basic Screen Effects by Emily Short
+
+The story title is "BIGFOOT BLUFF".
+The story author is "P.B. Parjeter".
+The story headline is "".
+The story genre is "General".
+The story description is "Ten years ago you renounced Bigfootdom to become a paparazzi. Now it is your job to do an exposé on your reclusive sasquatch father. Welcome to Bigfoot Bluff."
+The story creation year is 2022.
+
+When play begins, say "[b]Ten years ago you renounced Bigfootdom to become a paparazzi. Now it is your job to do an exposé on your reclusive sasquatch father. Welcome to..."
+
+
+Rule for printing the name of a room (called the chosen room): say the printed name of the chosen room in title case.
+
+The parking lot is a room.
+
+To say l: say "[line break]".
+To say p: say "[paragraph break]".
+To say b: say "[bold type]".
+To say i: say "[italic type]".
+To say endb: say "[roman type]".
+To say endi: say "[roman type]".
+
+Part - Help and About
+
+Asking for help is an action applying to nothing. 
+Understand "help" as asking for help.
+Understand "hint" or "hints" or "clue" as asking for help.
+
+Instead of asking for help, say "[l][b]BIGFOOT BLUFF[roman type] is an interactive fiction sandbox game. Try to do various things that will help you stay hidden in the park. As you do, your score will increase and you will be able to track down Bigfoot Senior and catch him on camera.[l]You do not have to finish every puzzle. Once you accumulate [threshold] points, you will be able to photograph Bigfoot Senior with ease.[l]Bigfoot Bluff is a forgiving game even though undoing is disabled. If you lose points, don't worry! Just keep playing and you will more than make up for the lost points.[l]For credits, type [b]about[endb].[l]To view the map once you obtain it, type [b]x map[endb]."
+
+Saying about is an action applying to nothing.
+Understand "about" as saying about.
+
+Instead of saying about, say "[line break][bold type]BIGFOOT BLUFF[roman type] was written by P.B. Parjeter for Spring Thing 2022. Contact the author at pbpjareter@protonmail.com or on the IF Forums at intfiction.org.
+[paragraph break]Beta testing was provided by Agnieszka Trzaska, Amanda Walker, Jade, Mike Russo, and Andrew Schultz. Thanks also to the members of Club Floyd, who beta tested the game, and David Whyld, who suggested a freshly-baked pie.
+[paragraph break]Icons used in the downloadable map PDF were created by Noun Project contributors Pavel N. (Parking), Alex C (Marsh), Christopher T. Howlett (Camping), Nick Kinling (Forest), Elisabeta (Summit), Med Marki (Canyon), Iconiqu (Den), Mino (Trailhead), Vincenzo Bianchi (Bathroom), Road Signs (Cabin), and Rflor (Lake).
+[paragraph break]Cover image: Sasquatch silhouette by Happybluemo via Wikimedia Commons. Supplement font: Classic Trash BRK via DaFont."
+
+Part - Debug - not for release
+
+[debug] Cheating is an action applying to nothing. Understand "cheat5" as cheating. Instead of cheating while the player is not in the parking lot, increase the score by 5.
+
+[debug] Skipping is an action applying to nothing. Instead of skipping: try examining bigfoot; try following bigfoot; try looking; try opening the car; try taking the camera; try photographing the board.
+
+[debug] Automapping is an action applying to nothing. Understand "auto1" as automapping. Instead of automapping: try skipping; now the player has the first map; now the player has the second map; now the second map is on the first map; try going north; try going north.
+
+
+Part - Release - For release only
+
+Use undo prevention.
+
+After reading a command: 
+	if the player's command includes "all/everything/every": 
+		say "You can't just scoop up everything at once despite your Bigfoot-sized hands."; 
+		reject the player's command.
+
+
+BOOK - GENERAL GAMEPLAY
+
+Part - Default Attributes
+
+[Enterable] Containers are usually not enterable. The car, the outhouse, the plane, the gondola, and the tent are enterable containers.
+
+Containers are usually openable. Containers are usually closed.
+
+The reveal any newly visible interior rule does nothing when the noun is enterable.
+
+[Un/examined] A thing can be examined or unexamined. A thing is usually unexamined. Carry out examining a thing: now the noun is examined.
+
+[Un/shielded] A thing can be shielded or unshielded. A thing is usually unshielded. 
+The welcome board, the car, the outhouse, the plane, the barrel, the gondola, and the tent are shielded.
+
+[Frozen] A container can be frozen or unfrozen. A container is usually unfrozen. Instead of inserting a thing into a frozen container: say "You can't put anything inside." 
+A supporter can be frozen or unfrozen. A supporter is usually unfrozen. Instead of putting something on a frozen supporter: say "You can't put anything inside."
+Frozen containers are usually open. 
+
+[Awake/asleep] A person is either awake or asleep. A person is usually awake.
+The park ranger is an asleep person.
+
+[Im/mobile] A thing can be mobile or immobile. A thing is usually immobile.
+
+[Intact/ruined] A thing can be intact or ruined. A thing is usually intact. 
+The tent is intact.
+
+[High/low]  A thing is either highup or lowdown. A thing is usually lowdown. Instead of taking something highup: say "That's too high to reach."
+The drone, the eagle, and the hawk are highup.
+
+[Sticks]
+
+A stick is a kind of thing.
+The grabber and the branch are sticks.
+
+[NEW ACTION] Taking it with is an action applying to two things. 
+Understand "take [something] with [something]" as taking it with.
+Instead of taking something with a stick: say "The tool barely extends your reach, so you try taking it with your hands."; try taking the noun.
+Report taking it with: instead say "That failed."
+
+
+[Carriable people] A person can be lightweight or heavyweight. The can't take other people rule does nothing when the noun is lightweight. People and animals are not fixed in place.
+The park ranger is a lightweight person. The crash test dummy is a lightweight person. The eagle, the flying squirrel, the hawk, the goat, and the sheep are lightweight animals.
+
+Bigfoot Senior is a heavyweight person. The Garbogriff and the Chupastrawba are heavyweight animals.
+
+[Stealable clothing] A thing can be stealable or unstealable. 
+The can't take people's possessions rule does nothing when the noun is stealable.
+
+[Vital things] A thing can be vital or disposable. Instead of dropping a vital thing: say "That's too important to drop."
+The first map, the second map, the cryptid album, the Senior photo, and the camera are vital.
+Instead of inserting a vital thing into something: say "You can't put that into that."
+
+[Deadend] A room can be deadend or waypoint. Rooms are usually waypoint.
+The summit, den, lakeshore, canyon, parking lot, marsh, crawlspace, and cabin are deadend.
+
+[Indoor/outdoors] A room can be indoor or outdoor. Rooms are usually outdoor. The den, the darkroom, the cabin, staircase, and the cave are indoor rooms.
+
+[Fixed by default] Things are usually fixed in place. Things in the inventory are not fixed in place. [Portable things are defined in-text]
+
+[Openmouth] A container can be openmouth or closetop. Containers are usually closetop.
+Instead of opening an openmouth container: say "It's an open-topped ant farm; it's already open." 
+Instead of closing an openmouth container: say "That can't be closed." Openmouth containers are usually open.
+The ant farm, the barrel, the birdhouse, the drinking straw, the knothole, the lake, and the copier tray are openmouth containers.
+
+[Readable] A thing can be readable or unreadable. Instead of opening a readable thing: try examining the noun. Instead of closing a readable thing: say "You close the book."
+The catalog, and cryptid album are readable things.
+
+[Sticky clothing] Things can be sticky or unsticky. Wearable things are usually unsticky. Instead of taking off a sticky thing: say "There's no reason to take it off."
+
+[Carrying capacities] The carrying capacity of a container is usually 5. The carrying capacity of a supporter is usually 5. [Other carrying capacities are defined in-text]
+
+
+The can't push what's fixed in place rule does nothing. [this allows buttons to be pushed]
+
+Rule for printing the name of an enterable container: 
+    say "[printed name]";
+    omit contents in listing.
+
+Rule for printing the name of an opaque container: 
+    say "[printed name]";
+    omit contents in listing.
+
+Rule for printing the name of a supporter: 
+    say "[printed name]";
+    omit contents in listing.
+
+Part - Spraying
+
+A thing can be sprayable or unsprayable. Things are usually unsprayable.
+
+Instead of spraying the paint with the paint, say "You can't spray the canister of paint with itself."
+
+Instead of spraying the player with paint, say "That might help you blend into the darkness, but it would be a most toxic disguise."
+
+An aerosol is a kind of thing. The black spray paint is an aerosol. The oil canister is a aerosol.
+Instead of spraying something with something that is not an aerosol: say "You can't spray things with that."
+
+Instead of spraying an unsprayable object with paint, say "Technically you could conceal just about anything with a coat of black paint, but you should use the canister's limited contents more wisely."
+
+Instead of spraying an unsprayable object with oil: say "There's no reason to oil that."
+
+[NEW ACTION] Spraying it with is an action applying to two things. Understand "spray [something] with [something that is held]" as spraying it with. Understand "spray [something that is held] at [something]" as spraying it with (with nouns reversed).
+Report spraying it with: instead say "That failed."
+
+[NEW ACTION] Spraying badly is an action applying to one thing. Understand "spray [something]" as spraying badly. Instead of spraying badly, say "You can try spraying [the noun], but you also need to decide what to spray it with."
+Instead of spraying badly a sprayable thing, say "Not a bad idea, but you need to decide what to spray it with." Instead of spraying badly the paint, say "You can't just spray paint everywhere; spray something with the paint."
+Report spraying badly: instead say "That failed."
+
+Part - Webcam
+
+Instead of spraying the camera with paint: say "You're not going to spray your own camera with black paint.[if a webcam is in the location of the player]What about spraying the webcam? [end if]".
+
+A webcam is a kind of sprayable thing. A webcam is usually fixed in place. The description of a webcam is "One of five surveillance cameras used to monitor the park. It's encased in a strong metal cage." The printed name of a webcam is "webcam". 
+
+The first webcam is in the den. The first webcam is a webcam.
+The second webcam is in the staircase. The second webcam is a webcam.
+The third webcam is in the campground. The third webcam is a webcam.
+The fourth webcam is in the gondola. The fourth webcam is a webcam.
+The fifth webcam is in the workstation. The fifth webcam is a webcam.
+
+A webcam has some text called once text. The once text of a webcam is "That will stop Bigfoot Senior from following you."
+A webcam has some text called again text. The again text of a webcam is "It's already blacked out."
+
+A webcam can be sprayed or unsprayed. Webcams are usually unsprayed.
+
+After spraying the first webcam with the paint while the player has the paint for the first time: say "[once text]"; now the description of the first webcam is "[again text]"; now the first webcam is sprayed; increase the score by 2.
+
+After spraying the second webcam with the paint while the player has the paint for the first time: say "[once text]"; now the description of the second webcam is "[again text]"; now the second webcam is sprayed; increase the score by 2.
+
+After spraying the third webcam with the paint while the player has the paint for the first time: say "[once text]"; now the description of the third webcam is "[again text]"; now the third webcam is sprayed; increase the score by 2.
+
+After spraying the fourth webcam with the paint while the player has the paint for the first time: say "[once text]"; now the description of the fourth webcam is "[again text]"; now the fourth webcam is sprayed; increase the score by 2.
+
+
+After spraying the fifth webcam with the paint while the player has the paint for the first time: say "[once text]"; now the description of the fifth webcam is "[again text]"; now the fifth webcam is sprayed; increase the score by 2.
+
+Instead of spraying the first webcam with the paint for at least the second time: say "[again text]".
+
+Instead of spraying the second webcam with the paint for at least the second time: say "[again text]".
+
+Instead of spraying the third webcam with the paint for at least the second time: say "[again text]".
+
+Instead of spraying the fourth webcam with the paint for at least the second time: say "[again text]".
+
+Instead of spraying the fifth webcam with the paint for at least the second time: say "[again text]".
+
+Instead of attacking an unsprayed webcam, say "You can't reach the webcam from here, and anything that you could throw at it wouldn't break the cage around it."
+Instead of attacking a sprayed webcam, say "You don't need to break it; you've blacked it out."
+
+
+
+	Part - Position Actions
+
+
+
+Lying down is an action applying to nothing. 
+
+Understand "lie down" as lying down.
+Understand "lie" or "crouch" or "sit" or "kneel" as lying down.
+
+Crawling is an action applying to nothing. 
+Understand "crawl" and "creep" and "tiptoe" and "inch" as crawling.
+
+Understand the command "stand" as something new. 
+Standing up is an action applying to nothing. 
+Understand "stand up" as standing up. Understand "stand" as standing up. 
+
+Hiding behind is an action applying to one thing. 
+Understand "hide near / behind [something]" as hiding behind. 
+
+Hiding under is an action applying to one thing. 
+Understand "hide under [something]" and "hiding in [something]" as hiding under. 
+
+Emerging is an action applying to nothing. 
+Understand "emerge from" and "unhide" and "unhide from" and "emerge" and "stop hiding" and "come out" as emerging. 
+
+
+	Part - Postures
+
+The posture is a kind of value. The postures are upright and prone. The player has a posture. When play begins, now the posture of the player is upright. 
+
+After lying down when the posture of the player is upright: now the posture of the player is prone; say "You drop your body to keep a low profile."; increase the score by 5. 
+After lying down when the posture of the player is prone: say "You are already down low."
+
+After standing up when the posture of the player is prone: now the posture of the player is upright; say "You stand up and are immediately more visible."; decrease the score by 5.
+After standing up when the posture of the player is upright: say "You are already standing up."
+After reading a command: if the player's command matches "get up" and the player is prone, replace the player's command with "stand."
+
+Instead of going to a room when the posture of the player is prone, say "You can't crawl between rooms. You have to get up (with [b]stand[endb]) before moving to a new location."
+
+Instead of crawling, say "Sasquatches are not built to tiptoe around like that. You can lie down in place, or you can stand up and move between places normally."
+
+Every turn: if the player is prone, say "You are [if the player is not inside a container]on the ground[else]hunched down[end if]."
+
+
+	Part - Hiding
+
+Concealment is a kind of value. The concealments are seen and unseen.
+The player has a concealment. When play begins, now the concealment of the player is seen. 
+
+Instead of hiding behind a shielded thing while the player is in a container: say "You can't hide near something while you're inside something. Type [b]exit[endb] first."
+
+Instead of entering something while the player is unseen: say "You can't get into something while you're hiding near something. Type [b]unhide[endb] first."
+
+Instead of exiting while the player is unseen: try emerging; continue the action.
+
+
+After hiding behind a shielded thing while the player is seen: say "You hide behind it."; now the concealment of the player is unseen; increase the score by 5.
+Instead of hiding behind a thing that is not shielded, say "You can't hide behind that."
+Instead of hiding behind when the concealment of the player is unseen, say "You are already hiding; you need to stop hiding (with [b]unhide[endb]) before you hide somewhere else."
+
+Instead of going to a room when the concealment of the player is unseen, say "You have stop hiding (with [b]unhide[endb]) before you move to another spot on the map."
+
+After emerging while the concealment of the player is unseen: say "You leave your hiding place."; now the concealment of the player is seen; decrease the score by 5.
+Instead of emerging while the concealment of the player is seen, say "You're not hiding behind anything."
+
+Instead of hiding under a thing, say "You can't use that to hide yourself." Instead of hiding under a shielded thing, say "You are not small enough enough to do that. The best you can do is hide behind things."
+
+Every turn, if the player is unseen, say "You are hiding."
+
+Instead of hiding behind while the player is in a container, say "You can't hide behind that while you're inside." 
+
+BOOK - SCORING AND PROGRESS
+
+Part - Score Phrases
+
+[Flagged] A person is either flagged, unflagged, or reflagged. 
+Bigfoot Senior is unflagged.
+
+To say far away: say "You notice a movement in the distance, but it soon disappears."
+To say less away: say "You notice a movement in the distance. You can just about make out the dark silhouette of Bigfoot Senior, but he disappears."
+To say closer: say "You see Bigfoot Senior hiding [if the player is in the parking lot]behind the welcome board[end if][if the player is in the trailhead]behind the gondola [end if][if the player is in the staircase]behind the water barrel [end if][if the player is in the forest]behind the outhouse [end if][if the player is in the desert]behind the plane [end if]just before he disappears. Better up your stealth score."
+To say on track: say "You're right on Bigfoot Senior's trail now; time to snap a picture."
+To say lost track: say "[one of]Bigfoot Senior isn't nearby[or]You don't see Bigfoot anywhere nearby[purely at random].".
+
+To say blare: say "You slip the photo into your album. Unable to deduce anything more about the creature on your own, you turn you ears to a loudspeaker elsewhere in the park.[l]Bigfoot Senior's voice blares through the speaker:[l]"
+
+Instead of taking the welcome board: say "[if the player holds the first map]You've already made a copy of it; it's in your inventory.[else]You aren't going to take the entire board. But you could make a copy of its map.[end if]"
+
+Part - Score Counting
+
+Use scoring. When play begins, increase the score by T0. When play begins, now the right hand status line is "Score: [Score]"
+
+T0 is a number that varies. T0 is 25.
+T1 is a number that varies. T1 is 40.
+T2 is a number that varies. T2 is 45.
+T3 is a number that varies. T3 is 50.
+The threshold is a number that varies. The threshold is 60. 
+
+Every turn when score > T1 and the score < T2 and a random chance of 1 in 30 succeeds and Bigfoot Senior is unflagged and the location of the player is not indoor: say "[i][far away][endi]".
+Every turn when score >= T2 and the score < T3 and a random chance of 1 in 25 succeeds and Bigfoot Senior is unflagged and the location of the player is not indoor: say "[i][far away][endi]".
+Every turn when score >= T3 and the score < threshold and a random chance of 1 in 15 succeeds and Bigfoot Senior is unflagged and the location of the player is not indoor: say "[i][closer][endi]".
+
+Every turn when score >= threshold and the location of the player is not indoor and Bigfoot Senior is unflagged and the location of the player is not indoor:
+	if a random chance of 1 in 3 succeeds:
+		now Bigfoot Senior is in the location of the player;
+		say "[i][On track][endi]";
+	else:
+		now Bigfoot Senior is nowhere;
+		say "[i][Lost track][endi]".
+
+
+Every turn, if the player is in the staircase and Bigfoot Senior is unflagged, now Bigfoot Senior is in the cabin.
+
+
+
+Instead of photographing Bigfoot senior when the score >= threshold:
+	say "You snap the perfect picture. As it reels from the camera, you realize that it hasn't developed properly. You need to take it to the dark room.";
+	now the player has the Senior photo;	
+	now Bigfoot Senior is in the cabin;
+	now Bigfoot Senior is flagged. [meaning he will not appear randomly anymore]
+
+The Senior photo is an object that is nowhere. The senior photo is either copied or uncopied. The description of the Senior photo is "It's a perfect shot of Bigfoot Senior. You need to make a copy of it for blackmail purposes."
+
+Instead of inserting the Senior photo into the mailslot: say "You need to keep the original copy of the photo.[if the player does not hold the copied photo] Better make a copy of it in the darkroom first.[end if]"
+
+
+[the counted senior photo has been copied]
+
+The copied photo is an object that is nowhere.
+Instead of inserting the Senior photo into the copier tray: 
+	if the Senior photo is not counted:
+		say "The machine whirs and spits out a copy of the photo.[l]You need to put it in Bigfoot Senior's door and blackmail him; let him know that you will reveal his park to the world."; 
+		now the player has the copied photo;
+		now the Senior photo is counted;
+	else if the Senior photo is counted:
+		say "You've already made one copy. That's enough."
+
+Instead of dropping the Senior photo: say "That's too important to drop."
+Instead of dropping the copied photo: say "That's too important to drop."
+
+[the counted copied photo has been inserted in the mailslot]
+Instead of inserting the copied photo into the mailslot: 
+	now the Senior photo is nowhere; 
+	now the front door is unlocked; 
+	say "You slide the photo through the mailslot. Bigfoot Senior must have seen the photo. The door clicks open loudly, and you enter."; 
+	wait for any key; 
+	now the copied photo is counted;
+	now Bigfoot Senior is in the cabin;
+	try going up.
+
+Part - Cryptid Album
+
+A thing can be counted or uncounted. A thing is usually uncounted.
+
+The cryptid album is a container that is nowhere. The description of the cryptid album is "It's a photo album that contains your snapshots of various cryptozoological creatures. You have photographed [number of score-photos in the virtualbox in words] cryptid(s). There are four to find throughout the park, not including Bigfoot Senior himself."
+
+Instead of photographing the Loch Ness Beaver while the lake is empty or the beaver is not in the lake: 
+	if the L-photo is not in the virtualbox:
+		now the L-photo is in the virtualbox;
+		try L-blaring;
+		say "You've taken a photo of the Loch Ness Beaver.";
+		increase the score by 2;
+	else if the L-photo is in the virtualbox:
+		say "You've already taken a photo of it."
+
+L-blaring is an action applying to nothing. Instead of L-blaring:
+	say "[l][blare] [l][b]This is the Loch Ness Beaver. It's a species from Scotland. Its long neck and buck-teeth, combined with its small size, make it nature's chainsaw.";
+	wait for any key; 
+	say "[l]You think Nessie was rare just because it was a dinosaur or something? Loch Ness Beavers were NEARLY EXTINCT until I caught one and bred them to become a thriving race of self-sustaining park denizens."; 
+	wait for any key; 
+	say "[l]I bred you for something too, of course: to protect the  insular culture of the sasquatches at all costs. I sent you to photography school to win the war on the media, to take down the tabloids that tried to reveal us to the world.";
+	wait for any key; 
+	say "[l]I guess you don't care about that though...you just want to expose me to the world like the rest of them."; 
+	wait for any key; 	
+	say "[l][roman type]The loudspeaker turns off.";
+	wait for any key;
+	continue the action.
+
+
+
+
+
+Instead of photographing the chupastrawba: 
+	if the C-photo is not in the virtualbox:
+		now the C-photo is in the virtualbox;
+		try C-blaring;
+		say "You've taken a photo of the Chupastrawba.";
+		increase the score by 2;
+	else if the C-photo is in the virtualbox:
+		say "You've already taken a photo of it."
+
+C-blaring is an action applying to nothing. Instead of C-blaring:
+	say "[l][blare][l][b]This is the Chupastrawba, a little-known cryptid. You have probably heard of its Tex-Mex relative, the Chupacabra, meaning 'sucker of goat blood.'"; 
+	wait for any key; 
+	say "[l]The Chupastrawba subspecies, however, has a rare mutation that leaves it with no fangs. I NURSED THIS ONE BACK TO HEALTH by putting diposable plastic straws where the teeth should be! They can drink the blood of any prey animal that roams the wild in tetra-packs!"; 
+	wait for any key; 
+	say "[l]Yes, this creature is a vampire, but what about you? What did you subsist on, when you were living in human society as a paparazzi? Discounted ramen past its due date? Doggie bags left over by celebrities and their catering services? You failed at your job and had to figuratively eat off the floor.";
+	wait for any key; 
+	say "[l]I know you see us cryptids as living on the outskirts of the society but you're really no different. Photography is best left as a hobby; don't make your livelihood depend on it."; 
+	wait for any key; 	
+	say "[l][roman type]The loudspeaker turns off.";
+	wait for any key;
+	continue the action.
+
+
+
+
+
+Instead of photographing the Unicorn: 
+	if the U-photo is not in the virtualbox:
+		now the U-photo is in the virtualbox;
+		try U-blaring;
+		say "You've taken a photo of the Unicorn.";
+		increase the score by 2;
+	else if the U-photo is in the virtualbox:
+		say "You've already taken a photo of it."
+
+U-blaring is an action applying to nothing. Instead of U-blaring:
+	say "[l][blare][l][b]This is the Unicorn. 'Uni' stands for 'University' here. Yes, I went to the trouble of getting the mascot of the school you went to and bringing it to the park.";
+	wait for any key; 
+	say "[l]No, I didn't know that mascots are just costumes, I thought they were real mythological creatures that were captured by the school."; 
+	wait for any key; 
+	say "[l]It's been five years since I brought the costume to the park, I can't remember what animal I put inside it. I think it's a deer or an antelope or an ibex or something. Some sort of hooved animal."; 
+	wait for any key; 
+	say "[l]Anyway, it's a GENUINE CRYPTID NOW! More genuine than YOU'LL EVER BE! Stop trying to undermine what I've built here. Just leave the park."; 
+	wait for any key; 	
+	say "[l][roman type]The loudspeaker turns off.";
+	wait for any key;
+	continue the action.
+
+
+
+
+Instead of photographing the Garbogriff: 
+	if the G-photo is not in the virtualbox:
+		now the G-photo is in the virtualbox;
+		try G-blaring;
+		say "You've taken a photo of the Garbogriff.";
+		increase the score by 2;
+	else if the G-photo is in the virtualbox:
+		say "You've already taken a photo of it."
+
+G-blaring is an action applying to nothing. Instead of G-blaring:
+	say "[l][blare][l][b]This is the Garbogriff, a creature with the head of a bear, the tail of a raccoon, the wings of a common crow, and the stomach of a garborator."; 
+	wait for any key; 
+	say "[l]Indeed, there are more types of interspecies breeding than we cryptids previously thought possible. Not all mythical creatures can be the offspring of majestic lions and eagles."; 
+	wait for any key; 
+	say "[l]But look, I took in this garbage-gobbling monster and raised it as my own. I treated this chimeric trash compactor like MY OWN FLESH AND BLOOD while you were off rejecting your Bigfoot background by studying photography at that 'media school' of yours."; 
+	wait for any key; 
+	say "[l]I can't blame you for that, I guess, but I can blame you for trying to expose me to the world. Stay away, and don't try and find me.[endb]";	
+	wait for any key; 	
+	say "[l][roman type]The loudspeaker turns off."
+
+The virtualbox is a closed unopenable container inside the cryptid album.
+The C-photo is nowhere.
+The L-photo is nowhere.
+The U-photo is nowhere.
+The G-photo is nowhere.
+
+Score-photos are a kind of thing. the C-photo, L-photo, U-photo, and G-photo are score-photos. 
+
+
+BOOK - SYNONYMS AND TEXT REPLACEMENTS
+
+	Part - Synonyms
+
+
+Understand "glasses" as sunglasses.
+Understand "rock" and "glyph" and "petroglpyh" and "glpyh" as petroglyph.
+
+Understand "grab [something]" and "seize [something]" as taking.
+Understand "lens" as camera.
+
+Understand "ripple" as the Loch Ness Beaver when the beaver is in the full lake.
+Understand "hole" as knothole when the location of the player is the location of the knothole.
+
+Understand "machinery" and "machine" as pump when the location of the player is the cave.
+Understand "machinery" and "machine" as weather machine when the location of the player is the workstation.
+
+Understand "trap" and "bear trap" as bear traps.
+Understand "pipes" as pump.
+Understand "belly" and "tummy" and "gut" as stomach.
+Understand "plastic straw" as straw.
+Understand "figure" and "father" as Bigfoot Senior. 
+Understand "car door" as the car.
+Understand "clothes" as the uniform.
+Understand "sign" as the welcome board.
+Understand "toilet" and "bathroom" as the outhouse.
+Understand "magazine" as catalog.
+Understand "chupa" and "Chupacabra" as Chupastrawba.
+Understand "dartgun" as blowgun.
+Understand "house" as cabin.
+Understand "catalogue" as catalog.
+Understand "mirror" as reflector.
+
+Understand "beaver tail" and "beaver's tail" and "tail" as beaver.
+Understand "garbage can" as trash can.
+Understand "bulb" and "light" as lightbulb.
+Understand "mud" and "mud puddle" as mud puddle.
+Understand "doormat" and "welcome mat" as mat.
+Understand "slot" and "mailbox" as mailslot.
+Understand "costume" and "mascot" and "horse" and "zipper" as unicorn.
+Understand "bike" as bicycle.
+Understand "airplane" as plane.
+Understand "cablecar" as gondola.
+Understand "garbo" and "hippogriff" as Garbogriff.
+Understand "Nessie" as Loch Ness Beaver.
+Understand "salt cube" and "salt block" as salt lick.
+Understand "Big Red" as flying squirrel.
+Understand "window" and "sill" as windowsill.
+Understand "mailbox" and "mail slot" and "mail box" and "slot" as mailslot.
+Understand "wire" and "line" as clothesline.
+Understand "seed" and "seeds" and "grain" and "grains" as birdseed.
+Understand "stick" as branch.
+Understand "cage" as webcam.
+
+
+The indefinite article of the reflector is "the".
+The indefinite article of the chocolate filling is "some".
+The indefinite article of the flying squirrel is "the".
+The indefinite article of the weather machine is "the".
+The indefinite article of the knothole is "the".
+The indefinite article of the slippers is "the".
+The indefinite article of the ants is "some".
+The indefinite article of the lavender leaves is "some".
+The indefinite article of scissors is "the".
+The indefinite article of the bear traps is "the".
+The indefinite article of the aviator sunglasses is "the".
+The indefinite article of the floodwater is "the".
+The indefinite article of the emetics is "some".
+The indefinite article of the welcome board is "the".
+The indefinite article of the lake is "the".
+The indefinite article of the uniform is "a".
+
+Understand "door" and "plane door" as plane when the location of the player is the desert.
+Understand "door" and "car door" as car when the location of the player is the desert.
+Understand "door" and "outhouse door" as outhouse when the location of the player is the forest.
+Understand "zipper" and "tent zipper" as tent when the location of the player is the campground.
+Understand "zipper" as unicorn when the location of the player is the summit.
+
+
+	Part - Rules
+
+Part - Default Responses
+
+The block throwing at rule is not listed in the check throwing it at rules.
+
+When play begins: now print empty inventory rule response (A) is "You're not carrying anything yet.";
+now parser error internal rule response (X) is "What?[p]";
+now block waking up rule response (A) is "Already awake.";
+now block sleeping rule response (A) is "You need to be wide awake when you're tracking Bigfoot.";
+now block saying sorry rule response (A) is "What?";
+now parser error internal rule response (N) is "That's not something you can do.";
+now announce the score rule response (D) is "Score plus [number understood in words]";
+now announce the score rule response (E) is "Score minus [number understood in words]";
+now the block attacking rule response (A) is "You can't just assault everything. You are a gentle giant.";
+now can't take what's fixed in place rule response (A) is "You aren't even going to try taking that.";
+now futile to throw things at inanimate objects rule response (A) is "It bounces off its target, and you catch it. You're back at square one.";
+now the immediately undo rule response (A) is "Undoing is disabled in Bigfoot Bluff.[if the story has ended] Try starting a new game and solving alternate puzzles instead![else] Don't worry about making mistakes; you will quickly make up any lost points as you play the game.[end if][l]";
+now announce the score rule response (A) is "[if the story has ended]In that game you scored [score][else]You have so far scored [score] points. You only need [threshold] points to photograph Bigfoot Senior and win the game[end if]";
+
+Instead of eating a person: say "You don't eat people. You are a gentle giant."
+Instead of eating an animal: say "You don't eat animals, or at least, not this one. You are a gentle giant."
+
+BOOK - OVERALL MAP 
+
+The landscape is scenery in the parking lot. Every turn: now the landscape is in the location of the player. The description of the landscape is "It's all part of BIGFOOT BLUFF NATIONAL PARK."
+Understand "park" and "horizon" and "scenery" and "environment" and "grenery" and "landscape" and "countryside" and "sky" and "view" and "nature" and "wildlife" and "river" and "lakeside" and "forest" and "summit" and "plateau" and "parking lot" and "meadow" and "den" and "cave" and "darkroom" and "crawlspace" as landscape.
+Admiring is an action applying to one thing. Understand "admire [something]" as admiring. Instead of admiring a thing: try examining the noun.
+
+The parking lot is a room.
+The trailhead is north of the parking lot.
+The meadow is north of the trailhead.
+
+The plateau is north of the meadow.
+The lower gate is a locked door. It is north of the plateau and south of the workstation.
+The workstation is north of the lower gate.
+The upper gate is a locked door. It is north of the workstation and south of the summit.
+The summit is north of the upper gate.
+
+The forest is west of the meadow.
+The den is west of the forest.
+
+The river is east of the meadow.
+The lakeshore is east of the river.
+
+The desert is southeast of the meadow.
+The canyon is southeast of the desert.
+
+The campground is northwest of the meadow.
+The marsh is northwest of the campground.
+
+The staircase is up from the meadow.
+The front door is up from the staircase and down from the cabin.
+The front door is a locked door.
+
+The grate is a locked door. It is down from the meadow.
+The cave is down from the grate.
+The darkroom is down from the cave.
+
+BOOK - SOUTH ROOMS
+
+Part - Parking Lot
+
+
+	Section - Player
+
+
+The description of the player is "You are a Bigfoot standing about eight feet tall. You can do pretty much everything a human can do, plus you can easily carry your entire inventory over one shoulder."
+
+The breath is part of the player. The description of the breath is "[if the sandwich is in the stomach]Your breath smells like peanut butter.[else]It's just your breath.[end if]".
+Instead of smelling breath: try examining the breath.
+
+Breathing on is an action applying to one thing. Understand "breathe on [something]" as breathing on. Instead of breathing on something, say "You exhale, but it doesn't do anything."
+
+
+
+The trail is scenery in the parking lot. Understand "trailhead" as trail. "The trail is north of the parking lot."
+
+The parking lot is a room. "You are in the parking lot of BIGFOOT BLUFF NATIONAL PARK. A trailhead extends to the north and heads deep into the wilds."
+
+[NEW ACTION] Exiting from is an action applying to one thing. Understand "exit [something]" as exiting from. Instead of exiting from, try exiting.
+
+	Section - Bigfoot Senior
+
+Understand "figure" as Bigfoot Senior. 
+The printed name of Bigfoot Senior is "the figure".
+
+Instead of doing something to unexamined Bigfoot Senior, say "Not until you look at him more closely."
+Instead of examining the unexamined Bigfoot Senior: 
+	say the description of Bigfoot Senior;
+	now Bigfoot Senior is examined;
+	now the printed name of Bigfoot Senior is "Bigfoot Senior".
+
+Bigfoot Senior is an unexamined person in the parking lot. The description of Bigfoot Senior is "It's your father, Bigfoot Senior, who retreated to this park years ago and seized control of it.[p]He's planning to spread news of his insular park through an underground network of cryptid creatures.[if Bigfoot Senior is unflagged] You need to photograph him and expose him to the world.[l][end if]"
+
+[NEW ACTION] Following is an action applying to one thing. 
+Understand "follow [someone]" as following. Understand "confront [someone]" and "approach [someone]" and "walk to / toward [someone]" and "crawl to / toward [someone]" and "inch to / toward [someone]" and "tiptoe to / toward [someone]" and "move to / toward [someone]" and "run to / toward [someone]" as following.
+Report following: instead say "That failed."
+
+
+[NEW ACTION] Talking to is an action applying to one thing. 
+Understand "talk to [someone]" as talking. 
+Report talking to: instead say "That failed."
+
+
+Bigfoot senior is either patched or unpatched. When play begins: now bigfoot senior is unpatched. [This is for the camera/etc bug]
+
+Instead doing something to examined unpatched Bigfoot Senior: 
+	say "You try to approach Bigfoot Senior, but he starts walking down the trail before you can even get close to him...and now he's gone."; 
+	now the welcome board is fixed in place in the parking lot; 
+	now the car is fixed in place in the parking lot; 
+	now Bigfoot Senior is nowhere; 
+	now the parking lot is outdoor;
+	now the player has the cryptid album;
+	now Bigfoot Senior is patched. 
+
+
+
+	Section - Photography
+
+[NEW ACTION] Photographing is an action applying to one thing. Understand "photograph [something]" and "take picture of [something]" and "take photo of [something]" and "snap photo of [something]" and "snap [something]" and "snapshot [something]" as photographing.
+Report photographing: instead say "That failed."
+
+
+
+Instead of photographing a thing, say "The camera flashes and the photograph reels out of the camera, but it's of no use to you. You let it flutter away in the wind."
+
+[NEW ACTION] Photographing-none is an action applying to nothing. Understand "photograph" and "take picture" as photographing-none.
+Instead of photographing-none: say "You have to say what you want to take a photograph of.[paragraph break]Type [b]photograph (something)[endb] to do so."
+Report photographing-none: instead say "That failed."
+
+Before photographing when the player does not have the camera: say "You can't photograph without a camera."; stop the action.
+
+	Section - The Board
+
+
+Instead of going to the trailhead while the player does not have the first map: say "There's no reason to go any further until you [if Bigfoot senior is in the parking lot]confront Bigfoot Senior[else]have a map[end if]."
+
+The welcome board is a thing that is nowhere. The description of the welcome board is "On the board, there is a map of the park. You'll never remember all of the trails just by looking at it.[if the player holds the first map] You've made a copy of it; it's in your inventory.[else] Perhaps there is a way to make a copy.[end if]"
+
+The first map is a vital thing that is nowhere. Instead of photographing the welcome board: say "You snap a picture of the welcome board and it reels out of the camera; you tuck it into your inventory. Now you can navigate the park with ease."; now the player has the first map.
+
+The camera is a portable vital thing in the car. The description of the camera is "It's a Kodak camera, the same type used to record the first Bigfoot films. This one is just for still photos, though, not video.[if the adjuster is counted]The automatic flash adjuster is permanently affixed to the camera."
+
+
+The description of the first map is "[l]From the center of the meadow, trails head in all directions. Each trail has more than one step in the relevant direction. Here they are:[line break]
+[l][b]North,[endb] up the mountain.
+[l][b]East,[endb] to the lake.
+[l][b]South,[endb] back to the parking lot.
+[l][b]West,[endb] to the forest and the den.
+[l]
+[l][b]Up,[endb] to the cabin.
+[l][b]Down,[endb] to the cave.
+[if the second map is on the first map]
+[l][l][b]Southeast,[endb] through the desert.
+[l][b]Northwest,[endb] to the campground and marsh.
+[end if]"
+
+To say ycr: say "You can go toward the meadow by heading [b]".
+To say ycg: say "You can also keep heading further from the center by going [b]".
+To say ft: say "[endb]From there, you can see every possible route.[l]".
+To say nlb: say "[no line break]".
+
+Instead of examining the first map when the player is not in the meadow:
+	if location of the player is the cave or the location of the player is the darkroom or the location of the player is the crawlspace:
+		say "[ycr]up. [nlb][ft]";
+	else if the player is in the summit or the player is in the workstation:
+		say "[ycr]south. [nlb][ft]";
+	else if the player is in the cabin:
+		say "[ycr]down. [nlb][ft]";
+	else:
+		say "[ycr][best route from the location to the Meadow]. [nlb][ft]";
+	if the location of the player is not deadend:
+		if the location of the player is the cave or the location of the player is the darkroom:
+			say "[ycg]down.[endb]";
+		else if the location of the player is the workstation:
+			say "[ycg]north.[endb]";
+		else:
+			say "[ycg][opposite of the best route from the location to the Meadow].[endb]"
+
+
+[NEW ACTION] Map-looking is an action applying to nothing. Understand "exits" as map-looking. 
+Report map-looking: instead say "That failed."
+
+
+Instead of map-looking:
+	if the player has the first map:
+		try examining the first map; 
+	otherwise: 
+		say "You can't see any such thing."
+
+Understand "map" as welcome board when the player does not have the first map.
+
+	Section - The Car
+
+The car is a thing that is nowhere. The description of the car is "The decal on the side says BIGFOOT BLUFF PARK RANGERS."
+
+After opening the car for the first time: say "Now the car is open. [line break][line break][i]Unlike in some games, you cannot always see inside things right away. You should enter the car or search the car to see what is inside.[endi]"
+
+[NEW ACTION] Honking is an action applying to one thing. 
+Understand "honk [something]" as honking. 
+Report honking: instead say "That failed."
+
+
+The horn is part of the car. Instead of honking the horn for the first time: say "If you do that, you'll draw attention to yourself. But you can if you really want to."
+Instead of honking the horn for the second time: say "[if the park ranger is in the car]The park ranger wakes up and snorts. He falls back to sleep immediately. Still, you have drawn attention to yourself.[else]The horn rings throughout the park, drawing attention to you.[end if]"; decrease the score by 1.
+Instead of honking the horn for at least the third time: say "You aren't going to do that again."
+
+	Section - The Ranger
+
+The park ranger is a lightweight person in the car. The description of the park ranger is "[if the player is not holding the park ranger]He is sleeping. It is best not to wake him up.[else]He's not the most observant person, but he would be even less observant if you could get rid of him. Without hurting him of course.[end if][line break][line break][if the park ranger is wearing the uniform]He doesn't seem to be using his uniform, which is slovenly unbuttoned.[else]He is in his undershirt.[end if]"
+
+Instead of waking the ranger, say "Best to let him sleep."
+Instead of talking to the ranger, say "He'd probably be scared out of his wits to see a talking Bigfoot. Or maybe you would just have nothing in common. Either way talking to people won't help."
+After taking the ranger, say "You sling him over your shoulder like King Kong and Fay Wray."
+
+
+	Section - Uniform
+
+
+The park ranger is wearing the uniform. The uniform is stealable. The uniform is sticky.
+The description of the uniform is "It's a standard brown park ranger uniform with a pocket. [if the player is wearing the uniform]It's not sasquatch-sized, but it fits well enough that you can pass for a park ranger at a distance. It has a pocket."
+After taking the uniform: say "You take off his uniform ; you've left the ranger in his undershirt."
+
+After wearing the uncounted uniform: 
+	say "It's not sasquatch-sized, but it fits well enough that you can pass for a park ranger at a distance.";
+		increase the score by 1;
+	now the uniform is counted.
+
+
+The pocket is part of the uniform. The description of the pocket is "It's on the outside of the ranger uniform[if the pocket is closed] and it's snapped shut[end if]." 
+The peanut butter sandwich is a portable stealable edible thing in the pocket. The description of the peanut butter sandwich is "It's the park ranger's lunch." 
+
+Instead of eating the sandwich: 
+	if the sandwich is uncounted:
+		say "You eat the sandwich and get peanut butter breath; this will give away your position."; 
+		decrease the score by 1; 
+		now the sandwich is in the stomach;
+		now the sandwich is counted;
+	otherwise if the sandwich is counted:
+		say "You aren't going to do that again.";
+		stop the action.
+		
+The stomach is nowhere.
+
+
+Instead of photographing the ranger: 
+	if the ID photo is uncounted:
+		say "You take a photograph of the ranger. This will serve as an ID photo and improve your disguise. You put it in the pocket.";
+		increase the score by 1; 
+		now the ID photo is in the pocket;
+		now the ID photo is counted;
+	otherwise:
+		continue the action.
+	
+The ID photo is nowhere. The description of the ID photo is "This benefits your diguise greatly. You'll keep it in your pocket for safekeeping." Instead of taking or dropping the ID photo: say "You don't have to use the ID; you'll just [if the player is wearing the uniform]keep it in your pocket[else]tuck it away[end if]."
+
+[NEW ACTION] Throwing up is an action applying to nothing. Understand "throw up" and "vomit" and "barf" as throwing up.
+Throwing upp is an action applying to one thing. Understand "throw up [something]" and "vomit [something]" and "barf [something]" as throwing upp.
+
+Instead of throwing up: say "You need to take a pill to help you do that."
+Instead of throwing upp: try throwing up.
+
+[NEW ACTION] Understand "leap" as jumping. Instead of jumping: say "You jump just inches from the ground; it is more like stomping actually. Your massive body weight means that jumping is not a useful action."
+[NEW ACTION] Stomping is an action applying to nothing. Understand "stomp" as stomping. Instead of stomping: say "You stomp the ground with your Bigfoot feet. There's no reason to keep doing this."
+
+Part - Trailhead
+
+The trailhead is a room. "The trailhead is surrounded by tall trees. It extends further; look at your map to find directions."
+
+		Section - Ghillie Suit
+		
+The branch is a portable thing in the trailhead. The description of the branch is "It's a leafy and bushy branch that has fallen off a nearby tree. It's almost big enough to fit over your entire body."
+
+The patch of moss is a portable thing in the den. The description of the moss is "It's almost the same size as you." 
+After taking the patch of moss for the first time: say "You tear the moss from the wall."
+
+Instead of tying the patch of moss to the branch: now the ghillie suit is in the location of the player; say "You've made a ghillie suit."; now the branch is nowhere; now the moss is nowhere.
+Instead of tying the branch to the patch of moss: now the ghillie suit is in the location of the player; say "You've made a ghillie suit."; now the branch is nowhere; now the moss is nowhere.
+Instead of putting the branch on the moss, try tying the branch to the moss.
+Instead of putting the moss on the branch, try tying the moss to the branch.
+
+Instead of wearing the branch: say "You're not going to wear the branch. At least, not on its own."
+Instead of wearing the moss: say "You're not going to wear the moss. At least, not on its own."
+
+The ghillie suit is a portable wearable sticky object that is nowhere. The description of the ghillie suit is "It's a leafy costume. It's an excellent disguise." 
+
+After wearing the ghillie suit: 
+	if the ghillie suit is uncounted:
+		say "You put on the disguise."; 
+		increase the score by 5;
+		now the ghillie suit is counted;
+	else:
+		say "You've already worn that once before."
+
+
+Section - Gondola
+
+The gondola is an enterable immobile container in the trailhead. 
+The description of the gondola is "The gondola heads up to the mountain peak via a cable. You can see the toothed chain that pulls the gondola.[if the gondola is mobile] The gondola automatically moves when you enter it.[else] It seems to be missing a part."
+
+Instead of touching the chain: say "The chain itself is fine as it is.[if the gear is not on the chain] You just need to put another part on the chain.[end if]".
+Instead of pulling the chain: try touching the chain.
+
+Instead of opening the gondola when the gondola is not mobile: say "There's no point in opening the vehicle when it isn't moving."
+Before entering the gondola while the gondola is mobile: try opening the gondola.
+
+The chain is a supporter that is part of the gondola. The indefinite article of the chain is "the". The description of the chain is "Above the gondola, you can see the toothed chain that pulls the car."
+After putting the gear on the chain: 
+	say "The gondola starts to move without you inside it, but fortunately it is on a loop and another car arrives immediately.";
+	now the gondola is mobile; 
+	now the gear is nowhere.
+
+After entering the gondola while the gondola is mobile and the gondola is in the trailhead: say "The gondola starts to move, beginning its long crawl up the mountain."; move the gondola to the summit.
+After entering the gondola while the gondola is mobile and the gondola is in the summit: say "The gondola starts to move, beginning its long crawl down the mountain..."; move the gondola to the trailhead.
+
+After going to the trailhead: now the gondola is in the trailhead; continue the action.
+After going to the summit: now the gondola is in the summit; continue the action.
+
+Instead of putting something that is not the gear on the chain: say "You can't put that on the chain."
+Instead of inserting the gear into the chain: try putting the gear on the chain.
+Instead of putting the gear on the gondola: try putting the gear on the chain.
+Instead of tying the gear to the chain: try putting the gear on the chain.
+
+BOOK - EAST ROOMS
+
+Part - River
+
+The river is a room. "[if the gnawed tree is in the river]The river trickles toward the muddy meadow.[else]The gnawed tree has fallen to the west, blocking the river and drying up the muddy meadow.[end if]".
+
+The distant-tree is scenery that is nowhere. Understand "gnawed tree" as distant-tree when the location of the player is the river and the gnawed tree is in the meadow. 
+The description of the distant-tree is "It's in the meadow now." 
+Instead of doing something to the distant-tree: say the description of the distant-tree.
+
+		Section - Gnawed Tree
+
+Instead of taking the gnawed tree: say "It's much too large to take [if the tree is in the meadow]even though it has fallen down[end if]."
+
+The gnawed tree is in the river. The description of the gnawed tree is "[if the gnawed tree is in the river]It's standing up but the center has been chewed away; its upper and lower points meet in triangular wedges.[else if the gnawed tree is in the meadow]It's fallen into what used to be the mud puddle, wiping away your tracks."
+	
+Instead of pushing the gnawed tree: try attacking the gnawed tree.
+Instead of attacking the gnawed tree: 
+	if the gnawed tree is uncounted:
+		say "You try and push it; you've clearly overestimated your strength. The tree is standing stronger than you expected.";
+	otherwise if the gnawed tree is counted:
+		say "It's already knocked down."
+
+[NEW ACTION]  Hitting it with is an action applying to two things. 
+Understand "hit [something] with [something]" and "slapping [something] with [something]" and "break [something] with [something]" and "attack [something] with [something]" and  "strike [something] with [something]" and  "fly at [something] with [something]"  as hitting it with.
+
+Understand "tell [something] to hit / slap / break / attack / strike  [something]" and "tell [something] to fly at [something]" and "tell [something] to take down [something]" as hitting it with (with nouns reversed).
+Report hitting it with: instead say "It refuses to do that."
+
+
+Instead of hitting the uncounted gnawed tree with the beaver: 
+	say "The animal swipes its tail. The tree comes crashing down and falls into the meadow to the [b]west[endb], simultaneously drying up the muddy river and wiping away your tracks.[l]The eagle flies to the desert."; 
+	now the tree is in the meadow; 
+	now the carrying capacity of the tree is 0; 
+	now the eagle is in the desert;
+	now all things on the tree are in the meadow; 
+	now the mud puddle is nowhere; 
+	now the distant-tree is in the river;
+	increase the score by 5;
+	now the gnawed tree is counted.
+	
+Instead of hitting the counted gnawed tree with the beaver: 
+	say "It's already been knocked down.".
+
+
+
+[NEW ACTION] Chewing it with is an action applying to two things. 
+Understand "chew [something] with [something]" and "gnaw [something] with [something]" and "eat [something] with [something]" and "bite [something] with [something]" as chewing it with.
+Understand "tell [something] to chew / eat / gnaw / bite [something]" as chewing it with (with nouns reversed).
+Report chewing it with: instead say "That failed."
+
+The teeth are part of the player. Instead of chewing the tree with teeth: say "You aren't going to chew the tree. At least, not with your own set of teeth."
+
+Instead of chewing the gnawed tree with the beaver: 
+	say "The beaver chews the tree one last time."; 
+	try hitting the gnawed tree with the beaver.
+
+[NEW ACTION] Petting is an action applying to one thing. Understand "pet [something]" or "stroke [something]" or "pat [something]" as petting.
+
+Instead of petting something, try touching the noun.
+
+Instead of touching the unicorn: say "You stroke it's fur, which seems very artificial."
+Instead of touching the goat: say "You stroke it's hair."
+
+Instead of touching the sheep: say "You stroke it's body."
+Instead of touching the chupastrawba: say "You stroke it's fur."
+Instead of touching the garbogriff: say "You stroke it's fur and feathers."
+Instead of touching the Loch Ness beaver: say "You stroke it's pelt."
+
+Instead of touching the eagle: say "You aren't going to do that to an aggressive bird."
+Instead of touching the hawk: say "You aren't going to do that to an aggressive bird."
+Instead of touching the eagle: say "You aren't going to that to a hyper-agressive squirrel, no matter how much it seems to be ony our side."
+
+Instead of touching the park ranger: say "You can't just go around touching humanoid creatures for no reason." 
+Instead of touching Bigfoot Senior: say "You can't just go around touching humanoid creatures for no reason." 
+
+
+	Section - Tree Contents
+
+The eagle is an animal on the gnawed tree. The description of the eagle is "It's a very majestic bird. It's too high up for you to do anything but look at it.[l]"
+
+Instead of examining the eagle while the eagle is on the gnawed tree: say the description of the eagle.
+
+Instead of doing something to the eagle while the eagle is on the gnawed tree: say "You can't reach the eagle[if the player is wearing the falconry glove] and the falconry glove isn't going to solve that problem[end if]."
+
+Instead of doing something to the eagle while the eagle is not on the gnawed tree: say "You bungle your attempt to interact with the bird[if the player wears the falconry glove] even though you're wearing the falconry glove[end if].[l][if the drone is in the location of the eagle]It flies upward and is immediately lasered into a million pieces by the desert drone. You have heard of militaries using birds of prey to fight drones; apparently this is not one of those birds.[else]It flies away, probably for good. It wasn't important anyway.[end if]"; now the eagle is nowhere.
+
+
+Part - Lakeshore
+
+The dam is in the lakeshore. The dam is an openmouth shielded enterable container. The description of the dam is "It's a beaver dam, large enough for you to enter."
+The carrying capacity of the dam is 2.
+
+Instead of inserting the beaver into the dam: 
+	if the gnawed tree is in the river:
+		say "It would go there on its own if it wanted to do so. Besides, it has work to do.";
+	else:
+		say "It's time for the beaver to go home.";
+		continue the action.
+
+The lakeshore is east of the river. "The rocky shoreline surrounds a lake that is currently [if the lake is empty]empty.[else]full.[end if]"
+
+The lake is an openmouth container in the lakeshore. Instead of opening the lake: say "It's a wide open lake that stretches across most the park. It's open enough already."
+The lake can be empty or full. The lake is full. 
+The description of the lake is "The lake is currently [if the lake is empty]empty[else]full.[end if]"
+
+
+The Loch Ness Beaver is a lightweight animal in the lake.
+The description of the beaver is "[if the beaver is in the full lake]It's a ripple coming from a creature beneath the water[else]It's the Loch Ness Beaver[end if]."
+The printed name of the beaver is "[if the beaver is in the full lake]ripple[end if][if the beaver is in the empty lake or the beaver is not in the lake]Loch Ness Beaver[end if]".
+Instead of taking the Loch Ness Beaver while the lake is full: say "You can't just take something that's twenty feet under the water."
+Instead of taking the Loch Ness Beaver while the lake is empty: now the player has the Loch Ness Beaver; say "You tuck the Loch Ness Beaver under your armpit."
+Instead of inserting the Loch Ness Beaver into the lake: say "Not after you went to so much trouble to get it."
+
+
+The falconry glove is a thing in the dam. The falconry glove is wearable and sticky and not fixed in place.
+
+Part - Desert
+
+The desert is a room. "This part of the park is a hot and barren desert."
+
+The drone is in the desert. The description of the drone is "It's flying over you and watching you." 
+Instead of doing something to the drone for the first time: say "The drone focuses its lens and you hear a click as it photographs you."; decrease the score by 1. 
+Instead of hitting the drone with the squirrel for the first time: try hitting the drone with the squirrel.
+
+Instead of examining the drone: say "The drone can't snap your photo right now, but you can try and get rid of it anyway."
+Instead of attacking the drone: say "As much as you want to attack it, it is too far out of reach. You'll need a flying animal to take it down."
+
+Understand "desert" as landscape.
+
+Section - Plane
+
+
+The plane is a closed enterable container in the desert. "It's a plane that has crashed in the desert. There is a door on the side."
+
+
+The hawk is an animal in the desert. The description of the hawk is "It's a very majestic bird." 
+
+Instead of doing something to the hawk: say "You bungle your attempt to interact with the bird[if the player wears the falconry glove] even though you're wearing the falconry glove[end if].[l][if the drone is in the location of the eagle]It flies upward and is immediately lasered into a million pieces by the desert drone. You have heard of militaries using birds of prey to fight drones; apparently this is not one of those birds.[else]It flies away, probably for good. It wasn't important anyway.[end if]"; now the hawk is nowhere.
+
+
+
+Section - Dummy
+
+The crash test dummy is a portable thing in the plane. The description of the crash test dummy is "The plane did not survive the crash, but the dummy did.[p][if the glove is worn by the dummy]It is wearing the falconry glove.[end if][if the aviator sunglasses are worn by the dummy]It is wearing a pair of aviator sunglasses.[end if]"
+
+Instead of eating the dummy: say "You don't eat people (not even plastic ones). You are a gentle giant."
+After taking the crash test dummy, say "He's light enough that you can carry him easily; you pick him up."
+
+The crash test dummy is wearing the aviator sunglasses. The aviator sunglasses are sprayable and stealable.
+The dark sunglasses are nowhere. The dark sunglasses are wearable.
+
+The description of the aviator sunglasses is "They are a highly reflective pair of sunglasses; the glare of the sky bounces off of them."
+
+
+After wearing the aviator sunglasses: say "The glare from the reflective coating gives your position away"; decrease score by 2.
+After taking off the aviator sunglasses: say "Your location is no longer betrayed by the glare of the glasses."; increase score by 2.
+
+After spraying the aviator sunglasses with paint when the player has the paint: 
+	if the aviator sunglasses are uncounted:
+		say "You take of the sunglasses and spray them with back paint; they are now darkened and unreflective. They are the perfect disguise.";
+		now the aviator sunglasses are counted;
+		now the aviator sunglasses are nowhere; 
+		now the player is wearing the dark sunglasses; 
+		increase the score by 4;
+	else if the aviator sunglasses are counted:
+		say "You already did that."
+
+[NEW ACTION] Frying it with is an action applying to two things. Understand "fry [something] with [something]" and "burn [something] with [something]" and "heat [something] with [something]" and "light [something] with [something]" and "reflect light / moonlight / sunlight / sun / glare / sky at [something] with [something]" and "focus light / moonlight / sunlight / sun / glare / sky on [something] with [something]" as frying it with. 
+Report frying it with: instead say "That failed."
+
+The ant-alt is nowhere.
+Instead of frying the ants with the aviator sunglasses: 
+	if the ant-alt is uncounted:
+		say "You focus the sun with the curvature of the sunglasses and manage to fry an ant or two.[l]However, that isn't enough for you to safely stick your hand in the container yet. You realize there is another way to reflect light in the forest."; 
+		increase score by 1;
+		now the ant-alt is counted;
+	else if the ant-alt is counted:
+		say "You've already done that."
+
+
+
+Instead of frying the aviator sunglasses with the ants: try frying the ants with the aviator sunglasses.
+Instead of frying the aviator sunglasses with the ant farm: try frying the ants with the aviator sunglasses.
+Instead of frying the ant farm with the aviator sunglasses: try frying the ants with the aviator sunglasses.
+Instead of frying the ants with the dark sunglasses: say "The sunglasses are now too dark to reflect sunlight. You realize there is another way to reflect light in the forest."
+
+Instead of frying the ants with something that is not the aviator sunglasses:
+	say "That has no effect."
+
+Part - Canyon
+
+
+The canyon is a room. "This is the end of the trail for you. You are at the top of a cliff looking out over a large canyon."
+
+The cliff is scenery in the canyon. The description of the cliff is "It's a steep drop. There's nothing you can do but look over it.[l]".
+Instead of doing something to the cliff, say the description of the cliff.
+Understand "canyon" as cliff.
+
+Section - Ants
+
+The ant farm is a portable openmouth container in the canyon. 
+Instead of inserting something into the ant farm: say "You don't need to put anything in the ant farm."
+
+The description of the ant farm is "It's an ant hill encased by glass, and it's bugged to listen in on your every move." 
+Instead of closing the ant farm, say "There's no lid on the ant farm for you to close."
+
+Instead of listening to the ant farm: try listening to the microphone.
+Instead of listening to the microphone: say "[if the microphone is inside the ant farm]You hear the static of the microphone.[else]You hear nothing unexpected."
+
+The microphone is a portable thing in the ant farm. The description of the microphone is "It's a microphone that is listening in on you."
+Instead of taking ants with a stick, say "It won't fit in the ant farm."
+Instead of attacking the ant farm: say "It's made of very strong plexiglass."
+
+
+The ants are inside the ant farm. The description of the ants is "They are very dangerous fire ants."
+The indefinite article of the ants is "some".
+The ants can be fried or alive. The ants are alive.
+
+
+Instead of doing something to the ants: 
+	if the ants are fried:
+		say "The ants are dead, but you don't need to handle them. Try taking the microphone instead.";
+	else if the ants are not fried:
+		say "You stick in a finger, and the ants immediately bite you."
+
+Instead of taking the microphone:
+	if the ants are not fried:
+		say "You try to reach a hand in, but you are immediately bitten by the ants. Your best bet is to fry them first.[if the ant-alt is counted and the ants are not fried][l]You think of the reflector in the forest.[end if]";
+	else if the ants are fried:
+		continue the action.
+
+
+Instead of attacking the microphone:
+	if the ants are not fried and the microphone is uncounted:
+		say "First you need to take the microphone.";
+		now the microphone is counted;
+	else if the ants are fried:
+		try taking the microphone;
+		say "You snap it in two. That takes care of that.";
+		increase the score by 5;
+		now the microphone is nowhere;
+	else if the microphone is counted:
+		say "You already did that."
+
+[NEW ACTION] Emptying is an action applying to one thing. Understand "empty [something]" and "shake [something]" and "shake out [something]" and "pour out [something]" and "dump out [something]" as emptying.
+Report emptying: instead say "That failed."
+
+Instead of emptying the ant farm, say "The ants have built their home too robustly for you to empty the container."
+
+
+
+		Section - Sheep and Wool
+
+
+[NEW ACTION] Throwing it over is an action applying to two things. Understand "throw [something] over / off [something]" and "toss [something] over / off [something]" and "drop [something] over / off [something]" as throwing it over. Instead of throwing something that is not a person over the cliff: say "You'd never get it back, and it would crumble to a million pieces once it hit the ground."
+Report throwing it over: instead say "That failed."
+
+Instead of throwing an animal over the cliff: say "You toss the animal over the cliff; it spins its legs in the air Wile E. Coyote-style and darts back to solid ground."
+
+The sheep is a lightweight animal in the canyon. The description of the sheep is "The sheep is covered in a thick coat of wool." 
+
+After taking the sheep, say "You sling the sheep over your shoulder."
+
+The wool is part of the sheep. The wool is wearable. The wool is not fixed in place. The description of the wool is "It's a thick coat of wool."
+
+After wearing the wool:
+	say "Well-disguised. You're a sasquatch in sheep's clothing.[l]You'll ignore the wool from now on."; 
+	now the wool is nowhere;
+	increase the score by 5.
+
+Instead of cutting the sheep: say "Unlike the Chupastrawba, you don't want to butcher the animal. There's something else on the sheep that you can cut though."
+Instead of cutting the sheep with the scissors: say "Unlike the Chupastrawba, you don't want to butcher and eat the animal. There's something else on the sheep that you can cut though."
+
+Instead of cutting the wool with the scissors, try cutting the wool.
+ Instead of shearing the sheep, try cutting the wool. Instead of shearing the wool, try cutting the wool.
+
+Instead of cutting the intact wool when the player has the scissors:
+		say "You have the coat of wool.";
+		now the description of the sheep is "It's a sheep."; 
+		now the player has the wool;
+		now the wool is ruined.
+Instead of cutting the intact wool when the player does not have the scissors:
+		say "You don't have anything to cut with."
+Instead of cutting the ruined wool:
+		say "You've already cut the wool."
+Instead of cutting the ruined wool with the scissors:
+		say "You've already cut the wool."
+
+Section - Chupastrawba
+
+The Chupastrawba is in the canyon. The drinking straw is part of the Chupastrawba. The drinking straw is portable.
+
+The Chupastrawba is an animal in the canyon. The description of the chupastrawba is "It's a cryptozoological creature that drinks the blood of goats, but only through the plastic straws surgically attached to its mouth. [if the sheep is in the canyon]It is hungrily eyeing the sheep."
+
+The drinking straw is part of the Chupastrawba. The straw is an open container. Instead of closing the straw, say "It's just an open tube." Instead of opening the straw, say "It's already an open tube."
+
+The description of the drinking straw is "It's a straight drinking straw; just like the ones you used to use to shoot spitballs in class."
+Instead of giving the sheep to the Chupastrawba: say "The Chupastrawba isn't desperate enough to eat the sheep despite the fact that it is salivating over it; it wants a proper goat to bite into."
+
+Instead of giving the goat to the Chupastrawba:
+	if the Chupastrawba is uncounted:
+		say "The Chupastrawba tries to bite into the sheep with his straw, but the goat leaps over the cliff and escapes.[l]The creature's drinking implement has broken off and fallen to the ground."; 
+		now the goat is nowhere;
+		now the drinking straw is in the location of the player;
+		now the chupastrawba is counted;
+	else:
+		say "The monster makes a good effort to bite into the goat, but you've aleady cut off the drinking straw that it was using as a tooth.[l]The goat leaps over the cliff and escapes.";
+		now the goat is nowhere.
+
+
+Instead of cutting the straw when the player has the scissors:
+	if the Chupastrawba is uncounted:
+		say "The soft straw slices off easily. Now you have the straw."; 
+		now the player has the straw;
+		now the Chupastrawba is counted;
+	else if the Chupastrawba is counted:
+		say "You've already taken one of his straws; best to leave him with the other."
+		
+Instead of cutting the straw when the player does not have the scissors:
+		say "You don't have anything to cut it with."
+
+Instead of cutting the straw with the scissors:
+		say "You've already cut off one of his straws; best to leave him with the other."
+.
+
+
+
+BOOK - NORTH ROOMS
+
+Part - Plateau
+
+	Section - Petroglyph
+
+The plateau is a room. The petroglyph is in the plateau. The description of the petroglyph is "The petroglyph is a rough map carved into a giant rock that displays additional trails.[if the player does not hold the second map] You can't tell the proper scale of the map just by looking at it.[else] You have a photograph of it.[end if]".
+Instead of putting the first map on the petroglyph: say "The petroglyph is much larger than your carried maps. You need to scale down the petroglyph to fit your original map."
+Instead of putting the petroglyph on the first map: say "You can't lift the entire rock. It's bigger than you are! Try scaling it down like you did with the other map."
+
+
+Instead of putting the second map on the petroglyph: say "The petroglyph is much larger than your carried maps. You need to scale down the petroglyph to fit your original map."
+Instead of putting the petroglyph on the second map: say "You can't lift the entire rock. It's bigger than you are! Try scaling it down like you did with the other map."
+
+Instead of taking the petroglyph, say "You can't take the entire rock with you. It's bigger than you are! Try scaling it down."
+
+The second map is a vital portable thing that is nowhere. 
+Instead of photographing the petroglyph: 
+	if the second map is uncounted:
+		say "A photo of the petroglyph reels out of your camera. Now it's in your inventory."; 
+		now the player has the second map;
+		now the second map is counted;
+	else if the second map is counted:
+		say "You already have the petroglyph photo. [if the second map is on the first map] You've combined the two maps; look at them while you are in the meadow."
+ 		
+The description of the second map is "It's a new map.[if the second map is on the first map] Now you see two more directions that you can go in. You must start from the meadow.[else] You need to figure out how it fits with the first one."
+
+The first map is a supporter. After putting the second map on the first map: say "The maps are combined. Now you see two more directions that you can go in. You must start from the meadow."; now the second map is fixed in place; now the second map is scenery.
+Instead of putting the first map on the second map: try putting the second map on the first map.
+Instead of putting an object that is not the second map on the first map: say "You can't do that."
+
+	Section - Grabber
+
+The grabber is a portable object in the plateau. The description of the grabber is "It's a long mechanical claw for grabbing garbage."
+
+	Section - Bear Traps
+
+The bear traps are in the plateau. The description of the bear traps is "Two bear traps are here; each is about the size of your foot." 
+
+[NEW ACTION] Touching it with is an action applying to two things. Understand "touch [something] with [something]" as touching it with.
+Report touching it with: instead say "That failed."
+
+
+[NEW ACTION] Understand "trigger" and "set off" and "poke" as touching.
+
+Instead of taking the bear traps: say "That would be dangerous. Besides, there isn't much point in moving or disabling them since you can safely avoid the traps where they are now."
+Instead of touching the bear traps: try taking the bear traps.
+Instead of taking the bear traps with a thing that is a stick: say "There isn't much point in trying to trigger the traps, since you can safely avoid the traps where they are now."
+Instead of touching the bear traps with a thing that is a stick: say "There isn't much point in trying to trigger the traps, since you can safely avoid the traps where they are now."
+
+Instead of closing the bear traps: say "That would be dangerous. Besides, there's no point in closing them, since you can safely avoid them where they are now."
+
+	Section - Spiked Boots
+
+
+The spiked boots are a vital thing that are nowhere. The spiked boots are wearable. The spiked boots are not fixed in place. The description of the spiked boots is "These will help you climb the mountain.[if the oil is uncounted]However, they are very noisy. They creak when you move[end if]."
+After wearing the spiked boots while the oil is uncounted: decrease the score by 1; say "They creak and clatter. Best not to wear them for long."
+After taking off the spiked boots while the oil is uncounted: increase the score by 1; say "The boots stop creaking."
+
+Instead of inserting the slippers into the bear traps: 
+	if the player is wearing the slippers:
+		say "You need to take them off before you do that.";
+	else if the player is not wearing the slippers:
+		say "The bear traps secure themselves around the slippers; now they are spiked boots."; 
+		now the bear traps are nowhere; 
+		now the slippers are nowhere; 
+		now the spiked boots are in the plateau. 
+
+
+[NEW ACTION] Stepping into is an action applying to one thing. Understand "step in [something]" and "step into [something]" as stepping into.
+Report stepping into: instead say "That failed."
+Instead of entering the traps: try stepping into the traps.
+
+Instead of stepping into the bear traps while the player is not wearing slippers: say "Stepping into the traps would be very dangerous."
+Instead of stepping into the bear traps while the player is wearing slippers: say "Stepping into the traps would be dangerous, even though you are wearing slippers. But you can try putting the slippers in the trap when you are not wearing them."
+
+Standing in is an action applying to one thing. Understand "stand in [something]" and "stand on [something]" as standing in.
+Instead of standing in the bear traps: say "That would be very dangerous [if the player wears the slippers] even though you have slippers on your feet."
+
+Instead of taking the slippers with the grabber: say "There's no need to do that; just take the slippers as usual."
+Instead of putting the slippers on the grabber: say "There's no need to do that; just put the slippers where you want them to go."
+
+	Section - Wooden Sign
+
+The detour sign is in the plateau. The description of the detour sign is "A wooden sign says that the northern path is blocked by chain link fences. You can also take a detour to the northeast."
+
+The summit is northeast of the plateau. 
+
+Instead of going northeast while the player is in the plateau: 
+	if the player is not wearing the spiked boots:
+		say "Despite being advertised as a detour, the path is too icy and slippery to climb.";
+	else if the player is wearing the spiked boots:
+		continue the action.
+
+
+	Section - Unicorn
+
+Instead of pulling the unicorn, try opening the unicorn.
+
+Before wearing the unicorn: say "It's a mascot suit, but [if the unicorn is closed]it's zipped shut.[else]you would rather not wear it, now that a goat has been in it.[end if]"; stop the action.
+
+The unicorn is a closed container in the summit. The description of the Unicorn is "The 'uni' here stands for 'university'. It is the mascot costume from your old photography school."  The indefinite article of the unicorn is "the".
+After examining the unicorn at least three times: say "You notice a zipper on the chest."
+
+After opening the unicorn while the goat is in the unicorn, say "You open the unicorn costume to find a goat inside. It bleats wildly, as this is the first time it has seen the light of day in years."
+
+Instead of taking the unicorn: say "You're probably strong enough to lift it, but you see no reason to take the entire costume.[if the unicorn is open and the player does not hold the goat][l]Perhaps you should just take the goat.[end if]"
+
+The goat is an animal in the unicorn. The goat is not fixed in place. The description of the goat is "Someone put this goat inside the unicorn costume. You should take it somewhere safer. Or somewhere less safe." 
+
+After taking the goat, say "You sling the goat over your shoulder."
+
+
+			Section - Snowball
+
+The snowball is a portable thing that is nowhere. The description of the snowball is "You have one shot to throw it."
+
+Understand "snowball" as snowbank when the player does not have the snowball. 
+
+The snowbank is in the summit. The description of the snowbank is "It's a bank of well-packed snow."
+Instead of taking the snowbank: now the player has the snowball; say "You take a clump of snow and pack it into a ball."
+Instead of taking the snowbank while the player has the snowball: say "You already have a snowball."
+Instead of dropping the snowball: now the snowball is nowhere; say "You drop the snowball and it shatters into pieces."
+
+Instead of throwing the snowball at something: say "The snowball hits its target, but with little effect. It shatters into pieces."; now the snowball is nowhere.
+
+Instead of throwing the snowball at the unicorn: say "The snowball hits [if the goat is in the unicorn]the unicorn, which bleats wildly. An unusual sound for a unicorn.[else]the unicorn.[end if]"; now the snowball is nowhere.
+
+Report throwing it at: instead say "That failed."
+
+The dr-snow is nowhere.
+The sq-snow is nowhere.
+The br-snow is nowhere.
+
+Instead of throwing the snowball at the drone: 
+	if the dr-snow is uncounted:
+		say "The snowball seems to weaken it a little, but not to any great effect."; 
+		now the snowball is nowhere; 
+		increase the score by 1;
+		now the dr-snow is counted;
+	else if the dr-snow is counted:
+		say "You've already thrown snow at it."
+
+Instead of throwing the snowball at the flock of birds: 
+	if the br-snow is uncounted:
+		say "The snowball seems to disperse the birds a little, but not to any great effect."; 
+		now the snowball is nowhere; 
+		increase the score by 1;
+		now the br-snow is counted;
+	else if the br-snow is counted:
+		say "You've already thrown snow at it."
+
+
+Instead of throwing the snowball at the squirrel: 
+	if the sq-snow is uncounted:
+		say "The squirrel's resolve has been weakened a little; now it's begging you for some food (probably peanut butter) instead of demanding it angrily."; 
+		now the snowball is nowhere; 
+		increase the score by 1;
+		now the sq-snow is counted;
+	else if the sq-snow is counted:
+		say "You've already thrown snow at it."
+
+Instead of throwing the snowball at a webcam: 
+	say "The snowball shatters before it hits the camera's cage. It has no effect."; 
+	now the snowball is nowhere.
+
+Understand "snow" as snowbank when the player does not hold the snowball.
+Understand "snow" as snowball when the player holds the snowball.
+
+
+
+Part - Workstation
+
+The workstation is a room. "Surrounded by a chain-link fence, you can see several pieces of heavy machinery. But only one catches your eye."
+
+The description of the lower gate is "The gate to the workstation leads north[if the lower gate is locked], but it's locked with a mechanism that can't be reached from here. It can only be unlocked from the top of the mountain[end if]."
+
+Instead of opening the upper gate while the upper gate is locked: say "It's locked, but there is a lever on it."
+
+Instead of going to the workstation when the player is in the plateau and the lower gate is locked: say the description of the lower gate.
+	
+Climate is a kind of value. The climates are sun, rain, snow, wind, windless, and fog.
+
+The weather machine is in the workstation.
+The weather machine has a climate.
+
+The description of the weather machine is "This machine can be used to control the weather. Some weathers will conceal you better than others, but it's all guess work on your part.[paragraph break]Type [b]set weather to (something)[endb] to use the machine." 
+
+The block setting it to rule is not listed in the check setting it to rulebook.
+
+Check setting to:
+	if the noun is not the weather machine:
+		say "[The noun] [aren't] something you can set." instead.
+
+The weather machine has a list of climates called completed-climates.
+		
+Check setting the weather machine to:
+	if the topic understood matches "[climate]":
+		if the climate understood is listed in completed-climates:
+			say "You've already triggered that setting. What's done is done." instead;
+		now the climate of the weather machine is the climate understood;
+		say "You set the weather machine to [climate of weather machine].";
+		add the climate of the weather machine to completed-climates;
+	else:
+		instead say "That isn't a setting.".		
+Carry out setting the weather machine to:
+	if the climate of the weather machine is sun:
+		say "That's not something the machine can control.[l][if the tent is uncounted]The sun is always going to be in the sky. Unless you take a nap until the evening.[else]Besides, you've already slept until evening and the sun is no longer in the sky.[end if]";
+	if the climate of the weather machine is snow:
+		say "It begins snowing. Your tracks will only make you easier to follow.";
+		decrease the score by 1;
+	else if the climate of the weather machine is rain:
+		say "It begins raining. Rain has no effect on your visibility.";
+	else if the climate of the weather machine is fog:
+		say "Yes! Fog will help keep you out of sight.";
+		increase the score by 5;
+	else if the climate of the weather machine is wind:
+		say "The wind picks up; this will only blow your scent around.";
+		decrease the score by 1;
+	else if the climate of the weather machine is windless:
+		say "You direct the wind to stop blowing. That will cover your scent.";
+		increase the score by 3.
+
+
+Understand "snowing" and "snowy" and "flurry" and "hail" as snow.
+Understand "raining" and "rainy" and "drizzle" and "drizzling" as rain.
+Understand "sunny" and "sunshine" and "hot" as sun.
+Understand "foggy" and "mist" and "misty" as fog.
+Understand "windy" and "blowing" and "gale" as wind.
+Understand "still" and "windless" and "still" and "wind off" and "no wind" as windless. 
+
+
+
+Part - Summit
+
+
+	Section - Upper Gate 
+
+The summit is a room. "It's a snowy mountain peak; the summit of Bigfoot Bluff.[if the upper gate is unlocked and the lower gate is unlocked]. South of here is the workstation."
+
+The description of the upper gate is "The gate leads south to the workstation. There is a lever on the gate."
+
+The description of the lever is "You should probably pull it."
+
+Instead of going to the workstation when the player is in the summit and the upper gate is locked: say "There's a gate blocking the way."
+
+The lever is part of the upper gate. 
+Instead of pushing the lever: try pulling the lever.
+Instead of pulling the lever for the first time: 
+	say "The gates around the workstation are now unlocked. You can now take the path that leads south."; 
+		now the description of the lever is "You pulled it earlier to open the gate.";
+		now the upper gate is unlocked; 
+		now the lower gate is unlocked; 
+		now the upper gate is scenery; 
+		now the lower gate is scenery.
+		
+Instead of pulling the lever: say "The gate is already open."
+
+Instead of going southwest from the summit: say "You can't go that way. [if the upper gate is not open]Instead, try to open the gate that leads south.[else]Just go south down the main trail.[end if]"
+
+	Section - Oil
+
+The oil canister is in the summit. The oil canister is portable. The description of the oil is "It's a spray canister for oiling things." 
+Instead of spraying the spiked boots with the oil: 
+	if the oil is uncounted:
+		if the boots are not worn by the player:
+			increase the score by 3; 
+			now the oil is counted;
+			say "The boots are now silent.";
+		if the boots are worn by the player:
+			say "That would indeed stop the boots from creaking. You need to take off the boots if you want to oil them.";
+	else if the oil is counted:
+		say "You've already done that."
+	
+Instead of spraying the gear with oil: say "It's certainly a machine that uses oil, but it's oiled enough already."
+Instead of spraying the bicycle with oil: say "It's certainly a machine that uses oil, but it's oiled enough already."
+Instead of spraying the chain with oil: say "It's certainly a machine that uses oil, but it's oiled enough already."
+Instead of spraying the unicorn with oil: say "That wouldn't accomplish anything. Plus, it's pelt already looks old and greasy."
+
+[NEW ACTION] Oiling is an action applying to one thing. Understand "oil [something]" and "put oil on [something]" and "spray oil on [something]" and "spray [something] with oil" as oiling.
+Instead of oiling something: try spraying the noun with the oil.
+Report oiling: instead say "That failed."
+
+BOOK - WEST ROOMS
+
+The forest is a room.  "You're on a forest trail, full of trees and greenery."
+
+Part - Forest
+
+Section - Outhouse
+
+	Section - More Outhouse
+
+The toilet bowl is part of the outhouse. Instead of doing something to the toilet bowl: say "That would be inappropriate."
+
+The outhouse is a closed openable enterable container in the forest. The description of the outhouse is "It's an outhouse.[if the outhouse is open] It smells of cleaning fluid."
+The cleaning fluid is part of the outhouse. The description of the cleaning fluid is "It is a very chemical smell." Instead of smelling the outhouse: try examining the outhouse.
+
+Visibility rule when in darkness:
+	if examining the first map:
+		say "You have to squint in the darkness, but you manage to read the map.";
+		there is sufficient light.
+
+	Section - Catalog
+	
+The catalog is inside the outhouse. The catalog is not fixed in place. The description of the catalog is "It shows various outfits and disguises. Most of them are man-made, but a ghillie suit on one page catches your eye." 
+The page is a portable part of the catalog. The description of the page is "It shows a leafy green ghillie suit. You could probably improvise one with natural materials."
+Instead of opening the catalog, try examining the catalog.
+
+[TEARING] Tearing is an action applying to one thing. 
+Understand "tear [something]" or "rip [something]" as tearing.
+Report tearing: instead say "That failed."
+
+Instead of tearing the page: try taking the page.
+Instead of taking the page: say "Instead of tearing the page out, you examine it more closely."; try examining the page.
+
+
+	Section - Emergency Button
+
+
+[NEW ACTION] Understand the command "push" as something new. Understand "press [something]" and "topple [something]" and "knock [something] over / down" and "push [something] over / down" and "knock down / over [something]" and "push down / over [something]" and "push [something]" as pushing. 
+Report pushing: instead say "That failed."
+
+
+
+The emergency button is a thing in the outhouse. The description of the emergency button is "It's for aging tourists who need the park ranger to help them use the toilets."
+After pushing the button for the first time: say "That will draw attention; you might want to think twice. Or think once and do it anyway."
+After pushing the button for the second time: say "A bell rings, and the park ranger [if the player does not hold the park ranger]comes onto the scene[else]escapes your grasp[end if]. He's watching you closely; that isn't good. Best get rid of him somehow."; now the park ranger is in the forest; now the description of the park ranger is "You've woken him up for good now; he's quaking in fear and probably wants to report you to park management. Best get rid of him."; decrease the score by 2.
+After pushing the button for at least the third time: say "You aren't going to do that again."
+
+Instead of inserting the ranger into the car: say "It's too late to put the genie back in the bottle. Or the toothpaste back into the tube. Or the park ranger back into his car."
+
+
+After inserting the ranger into the outhouse for the first time: say "You toss the ranger into the outhouse. You need to keep him there, though." 
+After closing the outhouse while the ranger is in the outhouse:
+	if the ranger is uncounted:
+		say "You slam the door shut. The ranger passes out from the antiseptic smell."; 
+		now the description of the ranger is "He's passed out."; 
+		increase the score by 4;
+		now the ranger is counted;
+	else if the ranger is counted:
+		say "You close the door."
+
+After pushing the outhouse while the ranger is in the outhouse: 
+	if the outhouse is uncounted:
+		try closing the outhouse; 
+		now the outhouse is nowhere; 
+		now the park ranger is nowhere; 
+		now all things in the outhouse are in the forest; 
+		now the emergency button is nowhere;
+		say "The outhouse topples to the ground. The park ranger is definitely not getting out of there now. It's the perfect crime.";  
+		increase the score by 5; 
+		now the toppled outhouse is in the forest;
+		now the outhouse is counted;
+	else if the outhouse is counted:
+		say "The outhouse has been knocked down permanently."
+		
+After pushing the outhouse while the ranger is not in the outhouse: say "There's no point in doing that unless there is someone inside of it."
+
+The toppled outhouse is nowhere. The description of the toppled outhouse is "It's knocked down permanently; anything that might have been inside is now on the ground."
+
+Instead of pushing the outhouse while the player is inside the outhouse: say "You can't push it down while you are inside it."
+Instead of doing something to the toppled outhouse: say "There's nothing you can do to it now. It's been knocked down for good."
+
+Section - Reflector
+
+Instead of frying something with the reflector: say "You can only turn the reflector between two positions. You'll have to place the target where the light hits."
+
+[Turning] A thing can be turnable or unturnable. Things are usually unturnable. 
+The can't turn what's fixed in place rule does nothing when the noun is turnable. The reflector is turnable.
+
+Understand "turn [something] left" and "turn [something] right" as turning.
+
+An angle is a kind of value. The reflector has an angle. The angles are left, right, and none.
+The reflector is in the forest. The description of the reflector is "The reflector is a mirror on a tall pole; it can be turned." The angle of the reflector is none.
+
+Instead of photographing the reflector while the angle of the reflector is left: say "The flash from the camera bounces into into the den to the west; from now on you can see what is inside it."; now the den is lighted.
+
+Instead of photographing the reflector while the angle of the reflector is right: 
+	if the ant farm is not on the windowsill:
+		say "The flash from the camera bounces toward the meadow and into Bigfoot Senior's window. Fortunately, he has closed the blinds and cannot see you."; 
+	else if the ant farm is on 
+	the windowsill:
+		say "The ants fry and disintegrate.";
+		now the ants are fried;
+		now the ants are nowhere.
+
+Instead of photographing the reflector while the angle of the reflector is none: say "The flash from the camera bounces into the air. You should turn the reflector before photographing it."
+After turning the reflector while the angle of the reflector is not right: now the angle of the reflector is right; say "The reflector rotates in a half-circle; now it is turned toward the meadow."
+After turning the reflector while the angle of the reflector is not left: now the angle of the reflector is left; say "The reflector rotates in a half-circle; now it is turned toward the den."
+
+[NEW ACTION] Flashing is an action applying to one thing. Understand "flash [something]" as flashing. 
+Instead of flashing something: 
+	if the player has the camera:
+		try photographing the noun;
+	else if the player does not have the camera:
+		say "You can't do that."
+Report flashing: instead say "That failed."
+
+Section - Trash Can
+
+Understand "lid" and "handle" as the trash can when the location of the player is the forest.
+
+Instead of taking the trash can: say "You can't take it, but you can open it without something else."
+
+The trash can is in the forest. The description of the trash can is "[if the trash can is closed]The trash is can built to keep out wild animals. The handle is much too small for bear claws to manipulate; unfortunately, that principle applies to Bigfoot hands as well.[end if][if the trash can is open]The trash can is open now.[end if]"
+
+Instead of opening the trash can, say "Your hands are too big to manipulate the trash can and its parts. You'll need to open it with something else."
+
+The emetics are a portable thing in the trash can. The description of the emetics is "They are pills that make you throw up. You don't know exactly how many are in the vial, but it looks virtually unlimited."
+Instead of eating the emetics: say "But you haven't eaten anything that you might need to throw up."
+Instead of eating the emetics when the sandwich is in the stomach: say "You pop a few pills (but not all of them) then choke up the peanut butter sandwich in a surprisingly wholesome form. Your breath is much better now."; now the player has the sandwich.
+
+Instead of taking the trash can with the grabber: try unlocking the trash can with the grabber.
+Instead of inserting the grabber into the trash can: say "That would be very short-sighted. You need the grabber to open the trash can."
+Instead of unlocking the trash can with the grabber: say "You open the trash can with the grabber.[l]The Garbogriff dives head-first into it and gobbles up the trash. Or at least, it eats the edible trash...there is still some stuff left in the can."; now the trash can is open; now the Garbogriff is in the Forest; now the description of the Garbogriff is "It's eating from the trash can."
+Instead of unlocking the trash can with the branch: say "You try to manipulate the trash can's handle, but you need something more hand-like."
+
+The red cellophane is a portable thing in the trash can. The description of the red cellophane is "It's a thin sheet of red transluscent plastic.[if the player holds the cellophane] You found it beside a broken lightbulb.[end if]"
+
+The crushed glass is in the trash can. The description of the crushed glass is "It looks like it used to be a lightbulb." The indefinite article of the crushed glass is "some".
+Instead of taking the crushed glass: say "It's a broken lightbulb. Not only is it too sharp to handle, it's useless now that it's broken."
+
+
+Section - Squirrel
+
+The knothole is an open container in the forest. 
+Instead of closing the knothole, say "It's a hole in a tree; you can't close it." 
+Instead of opening the knothole, say "It's a hole in a tree; it's already open."
+The description of the knothole is "It's a hole in one of the trees of the forest."
+
+The stomach is a container that is nowhere. 
+
+Section - Squirrel
+
+Instead of giving the pie to the squirrel: say "It's more interested in peanuts."
+
+The flying squirrel is a lightweight animal inside the knothole. 
+The description of the flying squirrel is "It's Big Red, a legendary hyperagressive squirrel [if the squirrel is hostile]that will be difficult to get on your side unless you feed it something.[else]that is now your friend.[end if][if the sandwich is in the stomach] The squirrel leans curiously close to your breath.[end if]".
+
+After examining the flying squirrel while the player holds the flying squirrel: say "It's sitting on your glove, waiting for your command."
+
+
+Instead of giving the sandwich to the squirrel: say "The squirrel happily eats the peanut butter sandwich and begins to trust you."; now the squirrel is friendly; now the sandwich is nowhere.
+
+
+The flying squirrel can be friendly or hostile. The flying squirrel is hostile.
+
+Instead of taking the flying squirrel while the player is not wearing the falconry glove: 
+	if the squirrel is friendly:
+		say "The squirrel is no longer hostile, but you'll need to wear something before you handle it.";
+	else if the squirrel is hostile:
+		say "You'll need to wear something before you handle it.";
+
+Instead of taking the flying squirrel while the player is wearing the falconry glove:
+	if the squirrel is friendly:
+		now the player has the squirrel;
+		say "The hyperagressive squirrel is sitting on your glove, waiting for your command.";
+	else:
+		say "The squirrel can't bite you through the glove, but it's still too agressive to handle. You need to feed it.".
+
+[REFER TO HITTING/ TELLING ACTION] 
+
+Instead of hitting the drone with the squirrel: 
+	if the drone is uncounted:
+		say "The squirrel takes off from your glove and attacks the drone, which falls to the ground and breaks into a million pieces. It can't photograph you anymore.[l]The squirrel departs, taking to the air, satisfied with a job well done.";
+		now the drone is counted;
+		increase the score by 5;
+		now the squirrel is nowhere;
+		now the drone is nowhere;
+	else if the drone is counted:
+		say "You've already done that."
+
+Part - Den
+
+The den is dark and west of the forest. "You're inside the den. [if the player holds the fireflies]The fireflies are lighting the area.[end if][if the Garbogriff is in the cave]You see a monster.[end if]"
+
+The lavender leaves are a portable thing in the den. The description of the lavender leaves is "It's a bunch of sedative leaves."
+Instead of taking the lavender leaves when the Garbogriff is in the den: say "The Garbogriff is lying on the bed of leaves, so you can't take them now."
+
+
+Instead of photographing something while the player is in the dark den: try photographing-none.
+
+Instead of photographing-none while the player is in the dark den: say "Your camera's flash would certainly light up the room. Unfortunately, you can't see your camera in the dark. Try aiming the camera's flash from the forest outside the cave."
+
+Every turn while the location of the player is the den and the player holds the fireflies: now the den is lighted.
+
+	Section - Garbogriff
+
+The Garbogriff is an animal in the den. The description of the Garbogriff is "It is hungrily eyeing the garbage can in the forest."
+
+Instead of talking to the Garbogriff: say "It doesn't understand you, but you pet its hide. It seems friendly."
+
+The gamet-count [garbogriff emetic count] is nowhere.
+
+The salt lick is a portable thing that is nowhere. The description of the salt lick is "It's a cubic salt lick that attracts wild animals."
+Instead of giving the emetics to the Garbogriff:
+	if the gamet-count is uncounted:
+		say "You give it a few pills. The Garbogriff chokes up a salt lick."; 
+		now the salt lick is in the trash can;
+		now the gamet-count is counted;
+	else if the gamet-count is counted:
+		say "You already made it throw up the salt lick earlier."
+
+The description of the flock of birds is "It's a flock of birds; they are drawing attention to your presence."
+
+Instead of doing something other than taking, dropping, or examining with the salt lick: say "You can't do anything with it except for leave it somewhere tempting."
+Instead of putting the salt lick on the pole:
+	if the birdhouse is not on the pole:
+		now the salt lick is nowhere;
+		now the elk is in the marsh; 
+		say "You put the salt on the pole; an elk bounds into the marsh and devours it immediately.";
+	else if the birdhouse is on the pole:
+		say "That's where it's supposed to go, but there's no room for it."
+
+Instead of eating the salt lick: say "It's intended for animal consumption."
+
+The elk is nowhere. The description of the elk is "It's a large hooved animal, but you knew that already. It looks like it would panic at the slightest touch."
+
+[NEW ACTION] Understand "pet [something]" as touching.
+Instead of touching the elk for the first time: say "The elk snorts, scaring away [if the dummy is uncounted]some, but not all, of the birds[else]the few birds that remain[end if]."; increase the score by 2.
+Instead of attacking the elk: try touching the elk.
+Report touching: instead say "That failed."
+Instead of touching a person: say "You can't just go around touching people like that."
+Instead of touching an animal: say "You pet the creature, but it merely glances at you."
+Instead of touching the squirrel: say "It's best to keep your handling of it to a minimum."
+
+
+
+Part - Campground
+
+The campground is a room. "The campground is either abandoned, or it's the off-season. Or Bigfoot Senior is deliberately driving away tourists. Either way, everything left here is yours for the taking."
+
+The tent is in the campground. The tent is a shielded closed openable enterable container. The description of the tent is "The tent canvas has a brown-and-green camoflage pattern on it." 
+
+Instead of taking the tent: say "You're not going to take the entire tent. You can open it or cut it apart."
+
+[NEW ACTION][UNZIPPING] Unzipping is an action applying to one thing. 
+Understand "unzip [something]" as unzipping. 
+Instead of unzipping something: try opening the noun.
+Report unzipping: instead say "That failed."
+
+[NEW ACTION][ZIPPING] Zipping is an action applying to one thing.
+Understand "zip up [something]" or "zip [something]" as zipping.
+Instead of zipping something: try closing the noun.
+Report zipping: instead say "That failed."
+
+The slippers are a portable wearable thing in the tent. The description of the slippers is "They are size 22.5."
+After wearing the slippers: say "This will help you walk around more quietly."; increase the score by 2.
+After taking off the slippers: say "Your footsteps are heavier when you're not wearing the slippers."; decrease the score by 2.
+
+Instead of sleeping while the player is inside the tent:
+	if the tent is uncounted:
+		say "You lie in the tent and doze off for several hours. The darkness will provide cover, even though the moonlight still illuminates the park."; 
+		increase score by 3;
+		now the tent is counted;
+		now the fireflies are in the meadow;
+	else if the tent is counted:
+		say "You're not tired anymore. Besides, nighttime is ideal for stalking Bigfoot Senior.".
+
+[NEW ACTION] Sleeping in the tent is an action applying to nothing. Understand "sleep in tent" and "sleep in the tent" as sleeping in the tent. Instead of sleeping in the tent while the player is in the campground: try silently opening the tent; try silently entering the tent; try sleeping.
+
+The fireflies are nowhere. The fireflies are portable and lit. The description of the fireflies is "They are fireflies that showed up after dark." The indefinite article of the fireflies is "the".
+
+Instead of taking the fireflies: say "You can't get a grip on them, but they swarm around you. It's as good as carrying them."; now the player has the fireflies.
+
+Instead of dropping the fireflies: say "You shoo the fireflies away; they stop following you."; now the fireflies are in the location of the player.
+
+Instead of sleeping while the player is in the campground: say "You wouldn't sleep on the ground when there is such a comfortable tent nearby."
+Instead of sleeping while the player is in the workstation: say "There are more comfortable places to take a nap."
+
+
+					Section - Cutting the Tent
+
+[NEW ACTION] Cutting it with is an action applying to two things.
+Understand "cut [something] with [something]" as cutting it with.
+Instead of cutting something with something that is not the scissors, say "That isn't going to work."
+Report cutting it with: instead say "That failed."
+
+[NEW ACTION]  Shearing is an action applying to one thing. 
+Understand "shear [something]" as shearing.
+Report shearing: instead say "That failed."
+
+
+The scissors are a portable thing in the tent. The indefinite article of the scissors is "the".
+
+The camoflaged sheet is nowhere. The camoflaged sheet is wearable. The camoflaged sheet is not fixed in place.
+
+Instead of cutting the intact tent when the player has the scissors:
+	if the sheet is uncounted:
+		say "You slice out a large portion of the tent canvas; now you have a camoflaged sheet the size of your body."; 
+		now the player has the camoflaged sheet;
+		now the sheet is counted;
+	else if the sheet is counted:
+		say "You've already cut it."
+		
+Instead of cutting the intact tent when the player does not have the scissors:
+	if the sheet is uncounted:
+		say "You don't have anything to cut with.";
+	else if the sheet is counted:	
+		say "You've already cut it."
+
+Instead of cutting the tent with the scissors: try cutting the tent.
+
+
+
+	Section - woven hat
+
+The woven hat is a wearable portable thing in the tent. The description of the woven hat is "It's a hat woven from straw, like a scarecrow would wear."
+
+After wearing the woven hat: say "It only makes you more conspicuous." ; decrease the score by 1.
+Instead taking off the woven hat while the player is wearing the hat: say "You take off that hat. That's better."; increase the score by 1; now the player has the hat.
+
+Instead of putting the woven hat on the dummy, say "It looks kind of like a scarecrow. But the hat immediately falls off because of [if the player has the dummy]the way you're carrying the dummy.[else]the way the dummy is sitting.[end if]"
+
+Instead of hanging the dummy on the pole, try putting the dummy on the pole.
+
+After putting the dummy on the pole: say "Now it's hanging from the pole."
+
+Instead of putting the woven hat on the dummy while the dummy is on the pole and the flock of birds is in the marsh: 
+	if the dummy is uncounted:
+		say "The birds recognize your construction as a scarecrow and scatter; they tear it apart on the way out. But at least they are not watching you any more."; 
+		now all things worn by the dummy are in the marsh;
+		now the dummy is nowhere; 
+		now the hat is nowhere; 
+		now the birds are nowhere;
+		increase the score by 6;
+		now the dummy is counted;
+	else if the dummy is counted:
+		say "You've already created that solution to the flock of birds."
+
+[NEW ACTION] Scaring is an action applying to one thing. Understand "scare [something]" and "frighten [something]" as scaring. Instead of scaring the birds, say "They aren't afraid of you, not on your own."
+Report scaring: instead say "That failed."
+
+Part - Marsh
+
+
+					Section - Cutting the Tent
+
+A thing can be intact or ruined. Things are usually intact.
+
+The scissors are a portable thing in the tent. The indefinite article of the scissors is "the".
+
+The camoflaged sheet is nowhere. The camoflaged sheet is wearable. The camoflaged sheet is not fixed in place.
+
+Instead of cutting the intact tent when the player has the scissors:
+		say "You slice out a large portion of the tent canvas; now you have a camoflaged sheet the size of your body."; 
+		now the player has the camoflaged sheet;
+		now the tent is ruined.
+Instead of cutting the intact tent when the player does not have the scissors:
+		say "You don't have anything to cut with."
+Instead of cutting the ruined tent:
+		say "You've already cut it."
+Instead of cutting the ruined tent with the scissors:
+		say "You've already cut it."
+
+Instead of cutting the tent with the scissors, try cutting the tent.
+
+Instead of wearing the camoflaged sheet for the first time:
+	say "You wrap the sheet around you like a cape; another part of your disguise. You'll ignore it from now on.";
+	increase the score by 3;
+	now the camoflaged sheet is nowhere.
+
+
+			Section - woven hat
+
+The woven hat is a wearable portable thing in the tent. 
+
+After wearing the woven hat: say "It only makes you more conspicuous." ; decrease the score by 1.
+Instead taking off the woven hat while the player is wearing the hat: say "That's better."; increase the score by 1; now the player has the hat.
+
+Instead of putting the woven hat on the dummy, say "It looks kind of like a scarecrow. But the hat immediately falls off because of [if the player has the dummy]the way you're carrying the dummy.[else]the way the dummy is sitting.[end if]"
+
+Instead of hanging the dummy on the pole, try putting the dummy on the pole.
+
+After putting the dummy on the pole: say "Now it's hanging from the pole."
+
+Instead of putting the woven hat on the dummy while the dummy is on the pole and the flock of birds is in the marsh: say "The birds recognize your construction as a scarecrow and scatter; they tear it apart on the way out. But at least they are not watching you any more."; now the dummy is nowhere; now the hat is nowhere; increase the score by 6. 
+
+	Part - Pole
+
+The marsh is a room. "It's a marsh with a lot of wildlife."
+
+The pole is in the marsh. The description of the pole is "It's about as tall as a person, and a bit shorter than you."
+The carrying capacity of the pole is 1.
+
+The birdhouse is on the pole. The birdhouse is a transparent open openmouth portable container. The description of the birdhouse is "It's a wood-carved birdhouse."
+Instead of inserting something into the birdhouse: say "You can't fit that inside the birdhouse."
+
+The birdseed is inside the birdhouse. The indefinite article of the birdseed is "some".
+
+Instead of pushing the birdhouse: say "You aren't just going to knock it off of the pole."
+Instead of taking the birdhouse for the first time: say "It looks pretty precarious. If you take it and make a mess, you'll have to deal with it somehow. Yet you are tempted to do so anyway."
+Instead of taking the birdhouse for the second time: say "You fumble with it and birdseed spills everywhere; birds sweep in from all corners of the earth."; decrease the score by 2; now the birdhouse is in the marsh; now the birdseed is in the marsh; now the flock of birds is in the marsh.
+Instead of taking the birdhouse for at least the third time: say "The birdhouse splintered into pieces when it fell; you discard what is left."; now the birdhouse is nowhere; now all things in the birdhouse are in the marsh.
+
+
+Instead of taking the birdseed, say "Your sausage-fingered hands can't pick up something as fine-grained as birdseed."
+
+The flock of birds is nowhere. "The flock of birds has swarmed down on the marsh; they're making a ton of noise and attracting attention to you. You should find a way to get rid of them."
+
+Instead of eating the birdseed, say "That's best left for the birds."
+Instead of taking the flock of birds, say "You can't just grab an entire flock of birds. In fact, you can't even catch one bird."
+
+The poison dart frog is in the marsh. The frog is not fixed in place. The description of the poison dart frog is "It's actually shaped like a poison dart, except it's a frog. It contains a strong muscle relaxant."
+
+Instead of eating the frog: say "It contains a strong muscle relaxant. It's too dangerous to eat, but it can be absorbed through the skin (preferably someone else's)."
+
+Instead of giving the frog to something: say "You can't just go around trying to poison things."
+
+
+BOOK - CENTRAL ROOMS
+
+Part - Meadow
+
+The cabin-scenery is scenery in the meadow. Understand "cabin" as cabin-scenery while the player is in the meadow. The description of the cabin-scenery is "It's a large triangular cabin and the home of Bigfoot Senior. You can ascend the staircase that approaches it by going up."
+
+The meadow is north of the trailhead. "You find yourself in a wide open mountain plain. Trails spread out in all directions. A large cabin is looming imposingly over the horizon."
+
+The mud puddle is a thing in the meadow. 
+
+Instead of examining the uncounted mud puddle: 
+	if the location of the gnawed tree is the river:
+		say "As you move toward it, you slip and leave a giant footprint in the muddy river. Your tracks give away your presence...but this can be fixed, if you like."; 
+		now the mud puddle is counted;
+		decrease score by 1;
+		now the feet are muddy;
+	otherwise if the location of the gnawed tree is the meadow:
+		say "The tree has wiped away the mud puddle.";
+		[don't count the mud puddle]
+	
+The description of the mud puddle is "You've left a footprint in the mud puddle. You won't make the mistake of stepping in it again."
+
+The printed name of the grate is "grate that leads[if the player is in the meadow] into the [else] above [end if]ground". The description of the grate is "Through the gaps in the grate, you can see a large cavern full of machinery."
+
+The key unlocks the grate.
+Instead of opening the grate when the grate is locked:
+	if the player holds the key:
+		say "You need to unlock the grate first.";
+	otherwise:
+		say "You need the key to the grate before you open it."
+
+Instead of inserting the key into the grate: try unlocking the grate with the key.
+
+After unlocking the grate with the key when the player has the key for the first time: say "The grate is now unlocked. You dispose of the key."; now the key is nowhere.
+
+The windowsill is in the meadow. The windowsill is a supporter. The description of the windowsill is "It's the window into Bigfoot Senior's cabin. There's no way for you to open the window itself."
+
+Instead of entering the windowsill: say "You can't get into the cabin that way."
+Understand "window" as windowsill.
+
+Instead of closing the grate: say "You don't need to close it ever again."
+
+[NEW ACTION] Locking is an action applying to one thing. Understand "lock [something]" as locking. 
+Report locking: instead say "You can't lock it like that."
+
+Instead of locking the grate: 
+	if the player holds the key:	
+		say "You don't have to lock it ever again.";
+	else:
+		say "You don't have to lock it ever again."
+Instead of locking the grate with the key: say "You don't need to lock it ever again."
+
+[NEW ACTION] Unlocking is an action applying to one thing. Understand "unlock [something]" as unlocking. 
+Report unlocking: instead say "You can't unlock it like that."
+
+Instead of unlocking the grate: 
+	if the player holds the key:	
+		try unlocking the noun with the key;
+	else:
+		say "You don't have a key to unlock the grate with."
+
+	Section - Pie
+
+The freshly-baked pie is a portable thing on the windowsill. The description of the freshly-baked pie is "It's a freshly-baked chocolate mud pie."
+
+Understand "chocolate pie" and "chocolate mud pie" and "mud pie" as pie when the player is in the location of the pie.
+
+Instead of closing the pie: say "You've broken the pie open; there's no way to close it again."
+Instead of cutting the pie: try opening the pie.
+Instead of attacking the pie: try opening the pie.
+
+After opening the pie: say "You break the pie's crust and see what's inside.[l][if the chocolate filling is in the pie]It's filled with chocolate filling.[end if]"
+
+Instead of eating the pie: say "That would be too unhealthy for this game. [if the mud puddle is in the meadow]Maybe its contents will prove useful, though.[end if]"
+
+Inside the pie is the chocolate filling. The chocolate filling is portable. The description of the chocolate filling is "It's a glob of chocolate filling from the chocolate mud pie."
+
+After taking the chocolate filling: say "You scoop up a glob of chocolate filling; the crust itself crumbles into oblivion."; now the pie is nowhere.
+
+	Section - Filling
+
+[NEW ACTION] Patching it with is an action applying to two things. Understand "patch [something] with [something]" and "cover [something] with [something]" and "fill [something] with [something]" as patching it with.
+Report patching it with: instead say "That failed."
+
+
+Instead of patching the mud puddle with the chocolate filling: try putting the chocolate filling on the mud puddle.
+
+Instead of inserting the chocolate filling into the mud puddle: try putting the chocolate filling on the mud puddle.
+
+Instead of putting the chocolate filling on the mud puddle:
+	if the mud puddle is counted:
+		if the chocolate filling is uncounted:
+			silently try taking the filling;
+			say "You patch up your footprint with the chocolate pie filling."; 
+			increase the score by 2;
+			now the chocolate filling is counted;
+			now the chocolate filling is nowhere;
+		else if the chocolate filling is counted:
+			say "You've already done that.";
+	else if the mud puddle is uncounted:
+		say "The surface of the mud puddle is unbroken; there's no reason to patch it right now."
+
+Understand "footprint" as mud puddle when the mud puddle is counted.
+
+Instead of giving the freshly-baked pie to an animal: say "That's too unhealthy for this game."
+Instead of giving the freshly-baked pie to a person: say "That's too unhealthy for this game."
+Instead of giving the chocolate filling to an animal: say "That's too unhealthy for this game."
+Instead of giving the chocolate filling to a person: say "That's too unhealthy for this game."
+Instead of eating the chocolate filling: say "That's too unhealthy for this game."
+Instead of eating the pie: say "That's too unhealthy for this game."
+
+Part - Staircase
+
+The staircase is a room. "You're on the landing of a staircase leading up to Bigfoot Senior's cabin."
+The front door is a locked door. "[if the player is in the staircase]The front door of the cabin is just a bit further up the steps; there is also a mailslot embedded in it.[else]The front door leads down to the staircase."
+
+	Section - Key to Grate
+
+The key is a portable thing that is nowhere. The description of the key is "The key appears to unlock the grate in the meadow."
+The welcome mat is in the staircase. The description of the mat is "It's a welcome mat, even though you're clearly not welcome here." 
+Instead of taking the mat for the first time: say "You lift it up and find a key, which you take. You'll ignore the mat from now on."; now the player has the key; now the welcome mat is nowhere.
+Instead of taking the mat for at least the second time: say "You're not going to lift it up again."
+Instead of searching the mat, try taking the mat.
+Instead of looking under the mat, try taking the mat.
+Understand "lift [something]" as taking.
+
+
+The barrel is an openmouth container in the staircase. The water is in the barrel. The indefinite article of the water is "a gallon of". The description of the barrel is "It's Bigfoot Senior's barrel of drinking water, boiled for sanitation purposes."
+
+
+
+Instead of drinking the water [in the staircase]: say "You aren't going to drink the water."
+Instead of drinking while the player is in the river: say "You aren't going to do that."
+Instead of drinking the lake: say "The water isn't clean enough."
+Instead of drinking the floodwater: say "The water isn't clean enough."
+
+Instead of drinking the barrel: try drinking water.
+Instead of drinking water, say "You're not thirsty."
+
+Understand "water" as floodwater when the location of the player is the cave.
+Understand "water" as lake when the location of the player is the lakeshore.
+Understand "water" as landscape when the location of the player is the river.
+
+[NEW ACTION] Drinking it with is an action applying to two things. Instead of drinking something with the straw: say "You aren't going to do that."
+
+Instead of inserting the emetics into the barrel: say "Those would only help Bigfoot vomit up whatever else you might put in the water."
+After inserting the leaves into the barrel: 
+	if the barrel is uncounted:
+		say "The leaves dissolve in the water, making a relaxing brew. That will slow Bigfoot Senior down."; 
+		now the leaves are nowhere; 
+		now the printed name of the water is "lavender water"; 
+		increase score by 5;
+	else if the barrel is counted:
+		say "You've already put some leaves in the barrel."
+		
+Instead of inserting the leaves into the water, try inserting the leaves into the barrel.
+
+	Section - Washing Feet
+	
+The feet are part of the player. Understand "foot" as feet. The feet can be muddy or clean. The feet are clean.
+
+The description of the feet is "They are your feet.[if the feet are muddy] They're muddy.[end if][if the player is wearing the slippers] You're wearing the slippers.[end if][if the player is wearing the spiked boots] You're wearing the spiked boots.[end if]"
+
+[NEW ACTION] Washing it with is an action applying to two things. Understand "wash [something] in [something]" and "wash [something] with [something]" and  "clean [something] in [something]" and "clean [something] with [something]" as washing it with.
+Report washing it with: instead say "That failed."
+
+Washing is an action applying to one thing. Understand "wash [something]" and "clean [something]" as washing.
+Report washing: instead say "That failed."
+
+Instead of washing feet while the player is in the location of the floodwater: try washing the feet with the floodwater.
+Instead of washing feet while the player is in the location of the barrel: try washing the feet with the barrel.
+Instead of washing feet while the player is in the location of the lake: try washing the feet with the lake.
+
+Instead of washing feet with the something: 
+	if the feet are muddy:
+		say "You safely scoop out some water and wash your feet. That will stop you from tracking mud around. However, you should still get rid of the mud puddle in its entirety.";
+		increase the score by 1;
+		now the feet are clean;
+	else if the feet are clean:
+		say "Your feet are already clean."
+
+Instead of pushing the barrel: say "You think about pouring the barrel into the meadow, but decide that it would only make more of a mess."
+
+	Section - Mailslot
+
+The mailslot is a container in the staircase. The mailslot is scenery. The description of the mailslot is "It's part of the door.[if Bigfoot Senior is in the cabin] Bigfoot Senior is inside with his back turned...but not close enough that you can interact with him.[end if]"
+
+The back is scenery in the staircase. The description of the back is "[if Bigfoot Senior is in the cabin]Bigfoot Senior is getting old and losing hair; he has a patch of bare skin around his neck.[else]You can't see anything." Understand "neck" and "bare skin" and "skin" as back.
+
+Instead of inserting a thing into the mailslot: say "You should only put photos in the mailslot. Specifically, you should put in the photo of Bigfoot Senior, which you'll get at the end of the game."
+
+Instead of inserting the ID photo into the mailslot: say "He's not interested in that photo."
+Instead of inserting the first map into the mailslot: say "He's not interested in that photo."
+Instead of inserting the second into the mailslot: say "He's not interested in that photo."
+Instead of inserting the cryptid album into the mailslot: say "He's not interested in that photo."
+
+	Section - Blowgun
+
+[NEW ACTION] Blowing is an action applying to one thing. 
+Understand "blow [something]" as blowing. 
+Blowing it at is an action applying to two things. 
+ Understand "blow [something] at [something]" as blowing it at. Instead of blowing the blowgun at a thing, try blowing the blowgun.
+
+Understand "Bigfoot Senior" and "Bigfoot" and "Senior" as the back when the location of the location of the player is the staircase and Bigfoot Senior is in the cabin.
+
+Report blowing: instead say "That failed."
+
+The blowgun is a portable thing that is nowhere. 
+
+The description of the blowgun is "You could make Bigfoot Senior less aware by shooting him with the sedative dart...but you need a way to steady and aim the blowgun."
+Instead of inserting the straw into the mailslot: say "There's no point in doing that unless you have something in the straw."
+After inserting the frog into the straw: say "Now you have a blowgun"; now the straw is nowhere; now the frog is nowhere; now the player has the blowgun.
+Instead of inserting the blowgun into the mailslot: say "Now the blowgun is aimed directly at Bigfoot Senior."; now the mailslot is open; now the blowgun is in the mailslot.
+Instead of blowing the blowgun while the blowgun is in the mailslot: 
+	if the blowgun is uncounted:
+		say "Bigfoot is hit directly by the dart and will soon experience its sedative effects. The blowgun disappears through the slot."; 
+		increase the score by 6; 
+		now the blowgun is nowhere;
+	otherwise if the blowgun is counted:
+		say "You've already done that and got the score."
+
+Instead of blowing the blowgun while the blowgun is not in the mailslot: say "The frog shoots out of the blowgun and misses your target, only to hop back in once again. You'll never have hands steady enough to aim it; you need something to rest it on as you aim at your target."
+Instead of blowing something at something: try blowing the blowgun.
+
+Instead of putting the blowgun on the windowsill: say "That is one way to steady the blowgun. Unfortunately, the window is closed, but there is another way in nearby."
+
+Instead of inserting something that is not the frog into the straw: say "Most things won't fit in the straw."
+After inserting the frog into the straw: 
+	say "Now you have a blowgun."; 
+	now the straw is nowhere; 
+	now the frog is nowhere; now the player has the blowgun.
+
+Part - Cabin
+
+The cabin is a room. "You walk into the cabin and gasp. There is a bank of TVs on the wall of the cabin showing slideshow images and film clips on various local news stations. Bigfoot Senior is sitting in front of them. Clearly, he is not so isolated as you thought."
+
+The bank of TVs is scenery in the cabin. 
+Instead of examining the bank of TVs when Bigfoot Senior is in the cabin, try talking to Bigfoot Senior.
+Instead of examining the bank of TVs when Elvis is in the cabin: say "They've been shot by Elvis." 
+Understand "television" and "screen" and "screens" and "tv" as the bank of TVs.
+
+Instead of talking to Bigfoot Senior while the player is in the cabin: 
+	now the description of the cabin is "It's Bigfoot Senior's cabin. He has been planning to broadcast himself on TV all along.";
+	now the broadcast button is in the cabin; 
+	say "Bigfoot Senior stands up and turns to you. He raises a fist and says:[l][l][b]You've found my secret. All those sasquatch sightings, all those disclosures to the public...I was behind them all along."; 
+	wait for any key; 
+	say "[l]There were never any human photographers. We sasquatches, we made the films ourselves and sent them out to credulous tabloids. With the royalties I earned, I expanded the boundaries of my park. How else could I protect our secret but by expanding our colony across a quarter of the American heartlands?"; 
+	wait for any key; 
+	say "[l]You think you came here to take me down? You've never been outside of Bigfoot Bluff! You just think you have! You've never seen a real human, just sasquatches dressed as humans.";
+	wait for any key; 
+	say "[l]Where do you think you learned all about 'media criticism'? That's right, at the same media school that I sent you to. It was all fake, all within the boundaries of the park."; 
+	wait for any key; 
+	say "[l]And now you're here to take down my park by sending out my photo to tourists and Bigfoot hunters, who will overrun the park."; 
+	wait for any key; 
+	say "[l]But in your attempts to take me down, you became just like me: waiting and watching quietly with your camera. The only thing your rebellion was good for was grooming you to take over my role: as head photographer of the BIGFOOT BLUFF MEDIA EMPIRE."; 
+	wait for any key; 
+	say "[l]So, what will it be: Do you want to join me? Or do you want to take me down?[endb][l]He gestures at a broadcast button.".
+
+The broadcast button is nowhere. The description of the broadcast button is "If you [b]push[endb] the button, you'll broadcast your photo and you'll become the very thing you hate. If you [b]destroy[endb] it, Bigfoot Senior will get away with what he's already done and keep running the park."
+Understand "destroy" as attacking.
+
+Instead of attacking the broadcast button, try pushing the broadcast button.
+Instead of pushing the broadcast button for the first time: say "You have second thoughts about your decision. You should look more closely at the button."
+
+Section - Elvis
+
+Elvis Presley is a person. Elvis Presley is nowhere. Elvis Presley is a person that is nowhere.  A person can be blinded or unblinded. Elvis is unblinded.
+
+Instead of pushing the broadcast button for at least the second time: 
+	if the broadcast button is uncounted: 
+		now the broadcast button is counted;
+		now the description of the broadcast button is "[if Elvis is not blinded]Elvis is in control now. The button is out of your hands.[else]You can let it be.[end if]";
+		now the park ranger is nowhere; 
+		now Bigfoot Senior is in the car; 
+		now Elvis is in the cabin; 
+		say "[l]Before you can do anything, the park ranger [if the player holds the ranger]that you forgot you were carrying leaps from your grasp[else]bursts in[end if] and shows his ID. He pulls off his [if the outhouse is counted]toilet cleaner-soaked [end if][if the player wears the uniform]underclothes[else]uniform[end if] to reveal he is a sasquatch. Then he pulls off his sasquatch suit to reveal he is actually a human after all.[l]He holds up an ID card and says:[l]";
+		wait for any key; 
+		say "[l][b]MY NAME IS ELVIS PRESLEY. Since my disappearance in 1977, I've been hiding undercover, just waiting for you to pull a stunt like this.[endb][l]He pulls out a pistol and shoots the bank of TVs."; 
+		wait for any key; 
+		say "[l][b]Do you think I faked my death and hid in the forest for decades just to have some brutish Bigfoot surpass my number of appearances in the Weekly World News? To have some stupid sasquatch outnumber my exposés in the National Enquirer? DO YOU?[endb]"; 
+		wait for any key; 
+		say "[l]Elvis picks up Bigfoot Senior and throws him through the window; then he takes a seat at the mostly-broken TVs. His finger hovers over the broadcast button.";
+	else if the broadcast button is counted:
+		say "Elvis is in control now. The button is out of your hands."
+
+The gun is part of Elvis. Instead of doing something to the gun: say "Elvis has a gun. You need a more peaceful solution to all this."
+
+
+Instead of going down from the cabin while Bigfoot Senior is in the cabin: say "You didn't come all this way just to quit."	
+
+The description of Elvis is "[if Elvis is unblinded][b]'I AM THE MOST VALUABLE CRYPTID,'[endb] Elvis screams.[l][else]He's whining on the ground and hiding in a corner."
+Instead of talking to Elvis: say the description of Elvis.
+
+Instead of going down from the cabin while the unblinded Elvis is in the cabin: say "You can leave later. First you have to deal with Elvis."	
+
+Instead of attacking Elvis: say "You need a less violent solution to this. What would you normally do with a rare cryptozoological creature?"
+Instead of throwing the snowball at Elvis: now Elvis is blinded; now the snowball is nowhere; say "It makes contact with his face and his eyes puff up. He won't be working with visual media any time soon."
+Instead of giving the sandwich to Elvis: now Elvis is blinded; now the sandwich is nowhere; say "Elvis eats the sandwich; his eyes puff up in an allergic reaction to the peanuts. He won't be working with visual media any time soon."
+Instead of photographing Elvis: now Elvis is blinded; say "He's temporarily blinded by the camera flash. Elvis won't be working with visual media any time soon."
+
+
+Every turn while Elvis is blinded and the player is not in the car: say "[i]Elvis is out of the picture. You need to get out of the park.[endi]".
+Instead of entering the cabin while Elvis is blinded: say "You don't need to go back in there."
+
+After entering the car while Bigfoot Senior is in the car: say "Bigfoot Senior is in the car. Time to drive away."
+Instead of driving while the player is not inside the car: say "There's nothing to drive."
+
+
+Instead of driving while the player is inside the car: 
+	if Bigfoot Senior is not inside the car: 
+		say "The keys are in the ignition, but you aren't about to steal the park ranger's car.";
+	else if Bigfoot Senior is inside the car:
+		say "You begin to drive.";
+		wait for any key; 
+		say "[l][b]'Let's call this a draw.' Bigfoot Senior says. 'There are other parks to live in, and other forms of media to commandeer for sasquatch-kind.'";
+		wait for any key; 
+		say "[l]In the hazy distance, you see hundreds of Elvis impersonators marching across a mountain ridge toward the park you once called home.";
+		wait for any key; 
+		say "[l]You drive away, resting assured that the park will return to its natural state of harmony."; 
+		wait for any key; 
+		end the story.
+
+Driving is an action applying to nothing. Understand "drive" and "drive away" and "drive car" as driving. 
+
+Part - Cave
+
+The cave is a room. "You're in a dark damp cave full of hydraulic machinery and pipes."
+
+The pump is in the cave.
+There is a pump in the cave. The description of the pump is "The pump is a large machine that spans the entire room. The only part of it that you can use is the wheel attached to it." 
+Instead of doing something to the pump: say the description of the pump.
+Instead of taking the pump: say "It's a giant machine that's fixed into the cave's walls. You can't take it."
+The wheel is part of the pump. The description of the wheel is "The metal is rusting, but you think you can turn it." The can't turn what's fixed in place rule does nothing when the noun is the wheel.
+
+The pump is either flowing-up or flowing-down. 
+The pump is flowing-up.
+	After turning the wheel while the pump is flowing-down: say "The pump shifts its flow; water is sucked back up into the lake."; now the pump is flowing-up; now the floodwater is nowhere; now the lake is full.
+	After turning the wheel while the pump is flowing-up: say "The pump shifts its flow; water floods into the cave up to your knees."; now the pump is flowing-down; now the floodwater is in the cave; now the lake is empty.
+
+The floodwater is nowhere. The description of the floodwater is "It's the water that has flowed into the cave. It only goes up to your knees, but it will prevent you from going deeper into the tunnel."
+
+Instead of taking the floodwater: say "You can't pick up an entire floor's worth of floodwater. You don't need it, either."
+
+The tunnel is a thing in the cave. "A stepped tunnel leads down to the darkroom. [if the floodwater is in the cave]It has been flooded.[end if]". Instead of entering the tunnel, try going down.
+Instead of going to the darkroom when the pump is flowing-down: say "You can't go any deeper when the water is flooding the cave."
+
+Part - Crawlspace
+
+The crawlspace is a dark room.
+The crawlspace is down from the darkroom. 
+
+Instead of crawling while the player is in the crawlspace: say "That's unnecessary here. Best try it somewhere else."
+Instead of lying down while the player is in the crawlspace: say "That's unnecessary here. Best try it somewhere else."
+
+Understand "cowl" as hood.
+
+The description of the crawlspace is "Beneath the floorboards is a low room with even more camera equipment."
+The old-time camera is in the crawlspace. The description of the old-time camera is "It's a tripod camera. It's old and broken and laying on its side; it's of no use to you."
+Instead of doing something to the old-time camera: say the description of the old-time camera.
+The photographer's hood is a portable wearable thing in the crawlspace. The description of the hood is "It's a dark hood worn by old-time photographers."
+Instead of wearing the photographer's hood: 
+	if the hood is uncounted:
+		say "You wear it like a cowl. This will conceal you in the dark.";
+		now the hood is counted;
+		increase the score by 2;
+		now the player is wearing the hood;
+	else if the hood is counted:
+		say "You've already worn it once."
+		
+Instead of taking off the hood: say "There's no need to take it off."
+
+	Section - Bicycle
+
+The description of the bicycle is "It's a bicycle. There is a gear near the pedals."
+The pedals are part of the bicycle. The description of the pedals is "They're just regular pedals." Instead of taking the pedals: say "You don't need them." Understand "pedal" as pedals.
+
+The bicycle is in the cave. The gear is part of the bicycle. The gear is a portable thing. The description of the gear is "It's a toothed thing that goes in a chain."
+
+After taking the gear: say "You take the gear off of the bicycle."; now the description of the bicycle is "It's a bicycle. You've already taken the gear off."
+
+[NEW ACTION] Riding is an action applying to one thing.
+Understand "ride [something]" as riding.
+Report riding: instead say "That failed."
+
+Instead of riding the bicycle: 
+	if the gear is part of the bicycle:
+		say "You're too big to ride it safely. But something on the bike catches your attention.";
+	otherwise:
+		say "You're too big to ride it safely."
+		
+Instead of taking the bicycle: say "If you were going to take the bicycle, you'd ride it. Picking it up defeats the purpose. But something on the bike catches your attention."
+
+The can't take component parts rule does nothing when the noun is the gear.
+
+Part - Darkroom
+
+The darkroom is down from the cave. "It's a photo development lab. Bigfoot Senior begrudgingly constructed it for you before you left the park to begin your career. You can go deeper down to the crawlspace."
+
+The lightbulb is a supporter in the darkroom. The description of the lightbulb is "It's on the ceiling and there's no way to turn it off. It's bright [if the cellophane is not on the lightbulb]yellow[else]red." The carrying capacity of the lightbulb is 1.
+Instead of putting a thing that is not the cellophane on the lightbulb: say "The only thing that you could put on a lightbulb is something that can be wrapped around it."
+After putting the cellophane on the lightbulb: say "The entire underground area take on a reddish tinge. Now you can see the hanging photos more clearly."
+Instead of taking the lightbulb: say "If you unscrewed it, you would be left in the dark. There's no other socket for it in the park, anyway."
+
+The copier tray is an openmouth container in the darkroom. The description of the tray is "This can be used to copy photos.[if the player is not holding the senior photo] You don't need it right now.[end if]".
+Instead of taking the tray: say "It's a photocopier tray for duplicating photos. It's exactly where it should be."
+Instead of inserting something into the tray: say "You don't need to put anything in the tray right now."
+
+The black spray paint is a portable thing in the darkroom. The description of the black spray paint is "It's a black spray paint can."
+
+
+The clothesline is a supporter in the darkroom. The description of the clothesline is "It's a wire that stretches across the room; photos are hanging on it to dry."
+
+There is a flash adjuster in the darkroom. The flash adjuster is portable. The description of the flash adjuster is "This device automatically adjusts the strength of your camera flash."
+Instead of putting the flash adjuster on the camera: say "You permanently affix the device your camera.[l]The camera's flash still lights up the scene when you take a picture, but it will not give your position away so easily."; now the flash adjuster is nowhere; now the adjuster is counted; increase the score by 2.
+Instead of putting something that is not the flash adjuster on the camera: say "It's no use."
+
+Instead of taking the flash adjuster while the flash adjuster is on the camera: say "It's permanently affixed to the camera and it's an automatic camera upgrade. You don't have to do anything more with it."
+
+[NEW ACTION] Hanging it on is an action applying to two things. Understand "hang [something] on [something]" as hanging it on.
+Report hanging it on: instead say "That failed."
+
+
+Instead of spraying the lightbulb with the black spray paint: say "That would make the room unnecessarily dark."
+
+Instead of hanging something on the clothesline: try putting the noun on the clothesline.
+Instead of putting something on the clothesline: say "Best not to add anything to Bigfoot Senior's array of photographs."
+Instead of cutting the clothesline: say "Best not to disrupt Bigfoot Senior's photographs."
+Instead of taking something that is on the clothesline: say "Best not to disrupt Bigfoot Senior's photographs."
+
+The highway photo is on the clothesline. The description of the highway photo is "[if the cellophane is not on the lightbulb]It hasn't developed yet.[else]Hanging on a line is a photograph of something that you saw in the news.[l][l]A man attempted to create a hoax by dressing up as Bigfoot: more specifically, by putting on a ghillie suit and running out into a busy highway. He was run over by two teenage girls in the attempt.[end if]"
+
+The shaman photo is on the clothesline. The description of the shaman photo is "[if the cellophane is not on the lightbulb]It hasn't developed yet.[else]Clothespegged to a wire is a photograph for a news story.[l][l]It features a shaman who once wandered the forests wearing an animal hide; he was mistaken for a Bigfoot years ago. He's holding a blowgun made from a straw-like reed.[end if]"
+
+The hunting photo is on the clothesline. The description of the hunting photo is "[if the cellophane is not on the lightbulb]It hasn't developed yet.[else]It's a photo from another news story. [l][l]In 2012, a Montana man shot a stranger while hunting, believing that he had sighted Bigfoot. 'If I see something that looks like Bigfoot, I just shoot at it,' the man is quoted as saying. The target hid behind his pickup truck until the shots stopped.[end if]"
+
+After examining the highway photo at least three times: say "[if the player does not wear the ghillie suit]You take special note of the ghillie suit.[else]You see nothing of interest in the photo.[end if]"
+
+After examining the shaman photo at least three times: say "[if the player does not hold the blowgun]You take special note of the blowgun and the animal hide.[else]You see nothing of interest in the photo.[end if]"
+
+After examining the hunting photo for at least three times: say "You take special note that the man is hiding behind things."
+
+[NEW ACTION] Xying is an action applying to nothing. Understand "xyzzy" as xying. 
+Instead of xying for the first time: say "You sputter out the letters as melodically as possible. Your nonsensical scout song and/or magic spell attracts a large bird, which swoops down and hands you a list of tasks."; now the player has the task list.
+
+The task list is a portable thing that is nowhere. The description of the task list is
+"Here are some things you can try:
+[line break]  Photograph four cryptids
+[line break]  Knock down a tree
+[line break]  Black out the webcams
+[line break]  Re-enact the clotheslines photos
+[line break]  Scare the birds
+[line break]  Spike Bigfoot Senior's water
+[line break]  Get rid of the park ranger
+[line break]  Break the microphone
+[line break]  Change the weather
+[line break]  Find a place for a nap
+[line break]  Find some camoflage
+[line break]  Feed the Chupastrawbra
+[line break]  Throw some snow
+[line break]  Take down the drone"
+
+Instead of examining the task list: say "You'll need to take it before you can read it."
+
+Instead of examining the task list while the player holds the task list for the first time: say "It's a list of hints. If you look at it again, you'll see minor spoilers for the game."
+
+Instead of examining the task list while the player holds the task list for at least the second time: say the description of the task list.
+
+CHAPTER - OTHER
+
+The decal is part of the car. The description of the decal is "It's just a sticker on the car."
+Instead of taking the decal: say "Peeling it off would be pointless."
+
+Understand "jacket" as uniform.
+
+The undershirt is part of the ranger. Understand "shirt" as undershirt. The description of the undershirt is "Best to leave him wearing that.[l]".
+Instead of doing something to the undershirt: say the description of the undershirt.
+
+Understand "saliva" as drool.
+The drool is part of the undershirt. The description of the drool is "You already know what drool is."
+
+The keys are part of the car. The description of the keys is "The keys are in the ignition, but you aren't about to steal the park ranger's car."
+Instead of taking the keys: say the description of the keys.
+
+Instead of inserting something into the knothole: say "The knothole is much too small to contain most things."
+
+Instead of inserting something into the pie: say "The pie is too delicate to hide anything inside, big or small."
+
+Instead of inserting something into the pocket: say "The pocket is too small to be useful for carrying anything."
+Instead of inserting something into the pocket: say "It's your stomach."
+
+Instead of inserting the ranger into the lake: say "He would drown. You need a non-violent way to keep him out of the way."
+
+Titling is an action applying to nothing. Understand "Bigfoot Bluff" as titling. Instead of titling: say "That's the name of the game you are playing."
+
+Understand "trails" and "trail" as map.
+
+Instead of going northwest from the meadow when the second map is not on the first map: 
+	if the player does not have the second map:
+		say "You can't go that way right now.";
+	if the player has the second map:
+		say "You need to figure out how the first and second map photos fit together before heading in that direction."
+
+Instead of going southeast from the meadow when the second map is not on the first map: 
+	if the player does not have the second map:
+		say "You can't go that way right now.";
+	if the player has the second map:
+		say "You need to figure out how the first and second map photos fit together before heading in that direction."
+
+Instead of touching the mud: try examining the mud.
+
+Instead of inserting a person into the trash can: say "That won't fit."
+Instead of inserting an animal into the trash can: say "That won't fit."
+
+After inserting the ranger into the plane: say "You put the ranger in the [second noun], but it's not a very good place to hide him. There is probably somewhere better to hide him in the forest."
+After inserting the ranger into the tent: say "You put the ranger in the [second noun], but it's not a very good place to hide him. There is probably somewhere better to hide him in the forest."
+After inserting the ranger into the barrel: say "You put the ranger in the [second noun], but it's not a very good place to hide him. There is probably somewhere better to hide him in the forest."
+After inserting the ranger into the dam: say "You put the ranger in the [second noun], but it's not a very good place to hide him. There is probably somewhere better to hide him in the forest."
+After inserting the ranger into the unicorn: say "You put the ranger in the costume, but it's not a very good place to hide him. There is probably somewhere better to hide him in the forest."
+
+Instead of inserting something into the unicorn: say "The unicorn costume isn't really useful for containing things."
+
+The carrying capacity of the unicorn is 1.
+
+[NEW ACTION] Combining it with is an action applying to two things. Understand "combine [something] with [something]" and "put [something] over [something]" and "unite [something] with [something]" and "join [something] with [something]" as combining it with.
+Instead of combining the first map with the second map: try putting the second map on the first map.
+Instead of combining the second map with the first map: try putting the second map on the first map.
+
+Understand "first photo" and "first photograph" as first map.
+Understand "second photo" and "second photograph" as second map.
+
+After putting a person on a supporter: say "It's a tight fit, but they manage to sit on it."
+After putting an animal on a supporter: say "It's a tight fit, but they manage to sit on it."
+
+After reading a command: 
+	if the player's command matches the regular expression "\(" or the player's command matches the regular expression "\)": 
+		say "Try typing that without the brackets."; 
+		reject the player's command.
+
+Understand "parking lot" as landscape.
+Understand "cable" as chain.
+
+Instead of dropping a thing that is worn by the player: say "You can't drop something that you are wearing."
+
+Understand "dad" and "father" as Bigfoot Senior.
+Understand "mic" and "mike" as microphone.
+
+Understand "wood" as tree when the player is in the location of the gnawed tree.
